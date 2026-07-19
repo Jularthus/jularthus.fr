@@ -247,7 +247,7 @@
         display: inline-block;
         width: 0.5ch;
         height: 0.72em;
-        margin-left: 0.06em;
+        margin-left: 0.16em;
         transform: translateY(0.06em);
         background: var(--red);
       }
@@ -524,9 +524,9 @@
       }
       .pin-latios {
         position: absolute;
-        top: -34px;
-        right: -26px;
-        width: clamp(96px, 11vw, 128px);
+        top: -52px;
+        right: -32px;
+        width: clamp(92px, 10vw, 120px);
         z-index: 2;
       }
       /* La rotation de pose vit sur l'image ; le balancement, sur le
@@ -538,7 +538,8 @@
       }
       @media (max-width: 860px) {
         .pin-latios {
-          right: -8px;
+          top: -44px;
+          right: -10px;
         }
       }
 
@@ -551,13 +552,14 @@
         color: var(--ink-soft);
         font-size: 16px;
       }
+      /* Une parenthèse, pas un chapitre : deux vignettes en ligne. */
       .garage {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1px;
         background: var(--line);
         border: 1px solid var(--line);
-        margin-top: clamp(22px, 3vw, 32px);
+        margin-top: clamp(18px, 2.5vw, 26px);
       }
       @media (max-width: 720px) {
         .garage {
@@ -566,16 +568,16 @@
       }
       .car {
         background: var(--paper);
-        padding: clamp(22px, 3vw, 34px);
+        padding: 16px 18px;
         display: flex;
-        flex-direction: column;
+        align-items: center;
         gap: 18px;
       }
       .car-photo {
         display: grid;
         place-items: center;
-        min-height: 200px;
-        padding: 10px 6px;
+        flex: 0 0 clamp(110px, 13vw, 160px);
+        padding: 4px 0;
       }
       .car-photo .pin {
         max-width: 100%;
@@ -586,26 +588,26 @@
       }
       .car-b .pin {
         rotate: 1.8deg;
-        max-width: min(300px, 88%);
+        max-width: 82%;
       }
       .car-path {
         font-family: var(--mono);
-        font-size: 12px;
+        font-size: 10.5px;
         letter-spacing: 0.04em;
         color: var(--ikb-lift);
       }
       .car-name {
         font-family: var(--display);
         font-weight: 400;
-        font-size: 25px;
-        line-height: 1.1;
-        margin-top: 4px;
+        font-size: 19px;
+        line-height: 1.15;
+        margin-top: 3px;
       }
       .car-desc {
-        font-size: 15px;
+        font-size: 13.5px;
+        line-height: 1.5;
         color: var(--ink-soft);
-        margin-top: 6px;
-        max-width: 40ch;
+        margin-top: 4px;
       }
 
       /* ============================================================
@@ -1339,7 +1341,7 @@
         </p>
         <div class="hero-meta">
           <div><b>EPITA Strasbourg</b> · Majeure SRS</div>
-          <div>Nancy → Strasbourg</div>
+          <div>Nancy → Strasbourg → Prague → Paris</div>
           <div>Sérieux dans le travail, léger partout ailleurs</div>
         </div>
       </div>
@@ -1395,11 +1397,11 @@
               <dl>
                 <div class="idcard-row">
                   <dt>Base</dt>
-                  <dd>Nancy → Strasbourg</dd>
+                  <dd>Nancy → Strasbourg → Prague → Paris</dd>
                 </div>
                 <div class="idcard-row">
                   <dt>École</dt>
-                  <dd>EPITA Strasbourg<small>majeure SRS · cybersécurité</small></dd>
+                  <dd>EPITA Strasbourg, puis Paris<small>majeure SRS · cybersécurité</small></dd>
                 </div>
                 <div class="idcard-row">
                   <dt>Obsessions</dt>
@@ -1411,7 +1413,7 @@
                 </div>
                 <div class="idcard-row">
                   <dt>Mot-clé</dt>
-                  <dd>Fiable<small>vérifiable plus bas</small></dd>
+                  <dd>Fiable<small>testé en conditions réelles</small></dd>
                 </div>
               </dl>
             </div>
@@ -1600,7 +1602,7 @@
             <h2 class="band-title">La stack<span class="dot">.</span></h2>
             <p class="band-note">
               Aucune de ces compétences ne vient d'une liste à cocher : chacune
-              répond à un problème rencontré. Cliquez, elles racontent où.
+              répond à un problème rencontré. Cliquez, elles racontent comment.
             </p>
           </div>
           <div class="skills" id="skills-grid"></div>
@@ -1616,6 +1618,28 @@
             <p class="langs-note">Un clic révèle la certification.</p>
           </div>
           <div class="langs" id="langs-grid"></div>
+        </div>
+      </section>
+      <!-- ======================================================
+           05 — CONCLUSION (contenu à personnaliser ensemble)
+           ====================================================== -->
+      <section class="band" id="conclusion">
+        <div class="shell">
+          <div class="band-head io">
+            <div class="eyebrow"><span class="prompt">$</span> 05 — Conclusion</div>
+            <h2 class="band-title">En résumé<span class="dot">.</span></h2>
+          </div>
+          <div class="about-text io" style="--d: 0.08s">
+            <p>
+              Un étudiant ingénieur qui vise la <i>cybersécurité</i>, qui
+              automatise tout ce qui bouge, qui enseigne ce qu'il apprend — et
+              dont le plus gros projet tourne, en production, depuis 2022.
+            </p>
+            <p>
+              Sympathique au premier contact, <strong>fiable</strong> sur la
+              durée. La suite s'écrit juste en dessous.
+            </p>
+          </div>
         </div>
       </section>
     </main>
@@ -1661,7 +1685,7 @@
         </div>
         <div class="sheet-body">
           <div id="sheet-desc"></div>
-          <div class="sheet-sub">Où je l'ai appris</div>
+          <div class="sheet-sub">Comment je l'ai appris</div>
           <ul class="points" id="sheet-points"></ul>
         </div>
       </div>
@@ -1826,6 +1850,17 @@
           ],
         },
         {
+          name: "Docker",
+          tag: "Conteneurs",
+          desc: "La maison de mon serveur : tout home.jularthus.fr tourne dedans.",
+          about:
+            "<p>Appris en production — la mienne. Toute la pile de <strong>home.jularthus.fr</strong> vit en conteneurs, et le cours <strong>IDVOC</strong> de l'EPITA a mis des mots (et des bonnes pratiques) sur ce que je faisais déjà.</p>",
+          points: [
+            "home.jularthus.fr : la pile entière en Docker Compose — un seul fichier décrit conteneurs, réseau et volumes",
+            "Cours IDVOC de l'EPITA — dont la supervision Prometheus + Grafana du serveur",
+          ],
+        },
+        {
           name: "C#",
           tag: "Langage",
           desc: "Un an d'algorithmique — et un jeu vidéo monté à cinq.",
@@ -1854,7 +1889,7 @@
           <span class="skill-tag">${s.tag}</span>
           <span class="skill-name">${s.name}</span>
           <span class="skill-desc">${s.desc}</span>
-          <span class="skill-more">où je l'ai appris <span class="arrow">→</span></span>
+          <span class="skill-more">comment je l'ai appris <span class="arrow">→</span></span>
         </button>`,
       ).join("");
 
@@ -1902,7 +1937,7 @@
          ============================================================== */
       const LANGS = [
         { name: "Français", level: "Langue maternelle", cert: "Natif" },
-        { name: "Anglais", level: "Courant", cert: "TOEIC · 960 / 990" },
+        { name: "Anglais", level: "Bilingue", cert: "TOEIC · 960 / 990" },
         { name: "Allemand", level: "Intermédiaire", cert: "B1 · Section Euro" },
       ];
 
