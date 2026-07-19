@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#fbfbf9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0c0c0f" media="(prefers-color-scheme: dark)" />
+    <title>Jularthus — Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio de Jules-Arthus Klein. Site en cours de construction."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ============================================================
+         TOKENS — repris tels quels de JArvis pour rester raccord
+         ============================================================ */
+      :root {
+        --ikb: #002fa7;
+        --ikb-deep: #001f70;
+        --ikb-lift: #002fa7;
+        --red: #e4002b;
+        --paper: #fbfbf9;
+        --ink: #111114;
+        --ink-soft: #5a5a63;
+        --line: rgba(17, 17, 20, 0.14);
+        --line-soft: rgba(17, 17, 20, 0.07);
+        --nav-bg: rgba(251, 251, 249, 0.82);
+        --grain-op: 0.16;
+        --grain-blend: overlay;
+
+        --display: "DM Serif Display", serif;
+        --body: "Instrument Sans", system-ui, sans-serif;
+        --mono: "JetBrains Mono", monospace;
+
+        --shell: 1160px;
+        --gut: clamp(20px, 5vw, 56px);
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      /* ============================================================
+         SOMBRE — suit le réglage du système, aucune bascule manuelle
+         ============================================================ */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ikb-lift: #5b86ff;
+          --red: #ff3b5c;
+          --paper: #0c0c0f;
+          --ink: #f1f1ee;
+          --ink-soft: #9494a0;
+          --line: rgba(241, 241, 238, 0.16);
+          --line-soft: rgba(241, 241, 238, 0.08);
+          --nav-bg: rgba(12, 12, 15, 0.8);
+          --grain-op: 0.1;
+          --grain-blend: soft-light;
+        }
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--body);
+        font-size: 17px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+        min-height: 100vh;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      ::selection {
+        background: var(--ikb);
+        color: #fff;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--red);
+        outline-offset: 3px;
+      }
+
+      .shell {
+        width: 100%;
+        max-width: var(--shell);
+        margin-inline: auto;
+        padding-inline: var(--gut);
+      }
+
+      /* Grain matte : l'IKB est un pigment poudreux, pas un aplat numérique */
+      .grain {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+        opacity: var(--grain-op);
+        mix-blend-mode: var(--grain-blend);
+      }
+
+      /* ============================================================
+         NAV — Jularthus. PORTFOLIO à gauche, WIP à droite
+         ============================================================ */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--line-soft);
+      }
+      .nav-in {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        height: 60px;
+      }
+      .brand {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        text-decoration: none;
+        color: var(--ink);
+        min-width: 0;
+      }
+      .brand-mark {
+        font-family: var(--display);
+        font-weight: 400;
+        font-size: 22px;
+        letter-spacing: -0.01em;
+        white-space: nowrap;
+      }
+      .brand-dot {
+        color: var(--red);
+      }
+      .brand-sub {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        white-space: nowrap;
+      }
+      @media (max-width: 620px) {
+        .brand-sub {
+          display: none;
+        }
+      }
+      /* Le marqueur WIP à droite : cadre mono, point rouge clignotant */
+      .nav-flag {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        border: 1px solid var(--line);
+        padding: 6px 12px;
+        white-space: nowrap;
+      }
+      .nav-flag .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--red);
+        box-shadow: 0 0 8px 0 color-mix(in srgb, var(--red) 65%, transparent);
+        animation: blink 1.8s var(--ease) infinite;
+      }
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.25; }
+      }
+
+      /* ============================================================
+         HERO — le texte seul, centré sur le papier
+         ============================================================ */
+      main {
+        flex: 1 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding-block: clamp(60px, 12vh, 140px);
+      }
+      /* Le mot en display italique, l'IKB pour la couleur, le point rouge */
+      .hero-word {
+        font-family: var(--display);
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(36px, 8vw, 92px);
+        line-height: 1.02;
+        letter-spacing: -0.01em;
+        color: var(--ikb-lift);
+        animation: rise 0.9s 0.15s var(--ease) both;
+      }
+      /* Curseur d'écriture : une barre rouge qui clignote en fin de mot,
+         comme si le texte était en train d'être tapé. Le clignotement est
+         « dur » (steps) pour imiter un vrai caret de terminal/éditeur. */
+      .hero-word .caret {
+        display: inline-block;
+        width: 0.07em;
+        height: 0.82em;
+        margin-left: 0.06em;
+        background: var(--red);
+        vertical-align: baseline;
+        transform: translateY(0.02em);
+        animation: caret-blink 1.06s steps(1) infinite;
+      }
+      @keyframes caret-blink {
+        0%, 50% { opacity: 1; }
+        50.01%, 100% { opacity: 0; }
+      }
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* ============================================================
+         FOOTER — l'aplat IKB, comme sur JArvis
+         ============================================================ */
+      footer {
+        flex-shrink: 0;
+        background: var(--ikb);
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+        padding-block: clamp(32px, 4.5vw, 48px);
+      }
+      .foot-in {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 28px;
+        flex-wrap: wrap;
+      }
+      .foot-title {
+        font-family: var(--display);
+        font-style: italic;
+        font-size: clamp(24px, 3.6vw, 40px);
+        line-height: 1.05;
+        font-weight: 400;
+      }
+      .foot-meta {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        line-height: 2;
+        color: rgba(255, 255, 255, 0.62);
+        text-align: right;
+      }
+      .foot-meta a {
+        color: #fff;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+      }
+      .foot-meta a:hover {
+        border-color: #fff;
+      }
+      #email-slot a {
+        color: #fff;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+      }
+      #email-slot a:hover {
+        border-color: #fff;
+      }
+      @media (max-width: 640px) {
+        .foot-meta {
+          text-align: left;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition-duration: 0.01ms !important;
+        }
+        html {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="nav">
+      <div class="nav-in shell">
+        <a class="brand" href="#top">
+          <span class="brand-mark">Jularthus<span class="brand-dot">.</span></span>
+          <span class="brand-sub">Portfolio</span>
+        </a>
+        <div class="nav-flag"><span class="dot"></span>WIP</div>
+      </div>
+    </header>
+
+    <main id="top">
+      <h1 class="hero-word">
+        En cours de<br />construction<span class="caret" aria-hidden="true"></span>
+      </h1>
+    </main>
+
+    <footer id="contact">
+      <div class="grain"></div>
+      <div class="foot-in shell">
+        <div class="foot-title">
+          Et si on travaillait<br />ensemble&nbsp;?
+        </div>
+        <div class="foot-meta">
+          <div>Discord · <a href="#">@jularthus</a></div>
+          <div>
+            GitHub ·
+            <a href="https://github.com/jularthus" target="_blank" rel="noopener noreferrer">@jularthus</a>
+          </div>
+          <div id="email-slot"></div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      /* ==============================================================
+         E-MAIL — assemblé ici, jamais écrit en clair dans la page.
+         Les parties arrivent séparées ; le "@" et le domaine ne se
+         rejoignent qu'à l'exécution, que les scrapers simples ne font pas.
+         ============================================================== */
+      (function () {
+        const user = "jules.arthus.klein";
+        const domain = "gmail";
+        const tld = "com";
+        const addr = user + "@" + domain + "." + tld;
+        const a = document.createElement("a");
+        a.href = "mailto:" + addr;
+        a.textContent = addr;
+        const slot = document.getElementById("email-slot");
+        if (slot) slot.appendChild(a);
+      })();
+    </script>
+  </body>
+</html>
