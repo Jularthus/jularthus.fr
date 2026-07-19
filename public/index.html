@@ -256,9 +256,19 @@
       }
       .hero-caption {
         margin-top: clamp(16px, 2.5vw, 26px);
-        font-size: 17px;
+        font-size: 18px;
         color: var(--ink-soft);
         opacity: 0;
+      }
+      /* Le nom passe devant : graisse et encre pleine, « Klein » en IKB —
+         même traitement que le cartel de la base. */
+      .hero-name {
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .hero-name b {
+        font-weight: 600;
+        color: var(--ikb-lift);
       }
       .hero.done .hero-caption {
         animation: rise 0.9s var(--ease) both;
@@ -722,12 +732,12 @@
       .timeline {
         position: relative;
         max-width: 760px;
-        padding-left: 4px;
       }
+      /* Épine et nœuds partagent le même axe : centre à 8px. */
       .timeline::before {
         content: "";
         position: absolute;
-        left: 11px;
+        left: 7px;
         top: 10px;
         bottom: 10px;
         width: 2px;
@@ -746,10 +756,10 @@
       .tl-item::before {
         content: "";
         position: absolute;
-        left: 4px;
-        top: 9px;
-        width: 12px;
-        height: 12px;
+        left: 0;
+        top: 7px;
+        width: 16px;
+        height: 16px;
         border-radius: 50%;
         background: var(--paper);
         border: 2px solid var(--line);
@@ -788,6 +798,17 @@
         color: var(--ikb-lift);
         letter-spacing: 0.04em;
       }
+      /* Le repère du présent : une petite flèche rouge, posée de travers. */
+      .tl-here {
+        display: inline-block;
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--red);
+        white-space: nowrap;
+        rotate: -2deg;
+      }
       .tl-desc {
         margin-top: 8px;
         max-width: 56ch;
@@ -806,6 +827,10 @@
         color: var(--ikb-lift);
       }
 
+      .acdc {
+        max-width: 760px;
+        padding-top: 18px;
+      }
       .points {
         list-style: none;
         border-top: 1px solid var(--line-soft);
@@ -1266,6 +1291,9 @@
       .sheet-body .points a:hover {
         border-color: var(--ikb-lift);
       }
+      .sheet-body .points i {
+        color: var(--ink);
+      }
 
       /* ============================================================
          MOUVEMENT RÉDUIT — la base, étendue à toutes les nouvelles
@@ -1333,7 +1361,7 @@
       <h1 class="hero-type" aria-label="jularthus.fr">
         <span id="typed" aria-hidden="true">jularthus.fr</span><span class="caret" aria-hidden="true"></span>
       </h1>
-      <p class="hero-caption">Un portfolio par Jules-Arthus Klein<span class="brand-dot">.</span></p>
+      <p class="hero-caption">Un portfolio par <span class="hero-name">Jules-Arthus <b>Klein</b></span><span class="brand-dot">.</span></p>
       <div class="hero-foot">
         <p class="hero-foot-note">
           Étudiant ingénieur en informatique, cap sur la cybersécurité.
@@ -1481,7 +1509,7 @@
           </div>
           <div class="feature-grid">
             <div class="io" style="--d: 0.08s">
-              <h2 class="feature-title">home<span class="dot">.</span>jularthus.fr</h2>
+              <h2 class="feature-title">home<span class="dot">.</span>jularthus<span class="dot">.</span>fr</h2>
               <p class="feature-sub">
                 <strong>Mon plus gros projet, en développement depuis 2022</strong> :
                 un serveur Plex fait maison. Parti d'un script Python écrit
@@ -1555,39 +1583,51 @@
                   <svg class="lock" width="11" height="13" viewBox="0 0 11 13" fill="none" aria-hidden="true"><rect x="0.75" y="5.25" width="9.5" height="7" stroke="currentColor" stroke-width="1.5"/><path d="M2.75 5V3.5a2.75 2.75 0 0 1 5.5 0V5" stroke="currentColor" stroke-width="1.5"/></svg>
                   majeure SRS
                 </small>
+                <span class="tl-here">← vous êtes ici</span>
               </h3>
               <p class="tl-desc">
                 Spécialisation choisie : la majeure
                 <strong>SRS — Systèmes, Réseaux &amp; Sécurité</strong>.
                 Autrement dit, la <strong>cybersécurité</strong> : celle qui
                 m'occupe la tête depuis le début, désormais au programme.
+                Première étape franchie : j'ai survécu à l'ING1 —
+                <strong>zéro rattrapage</strong> au compteur. La fiabilité, ça
+                commence par ses propres partiels.
               </p>
             </div>
-            <div class="tl-item io" style="--d: 0.4s">
-              <div class="tl-period">EPITA · en parallèle</div>
-              <h3 class="tl-title">Parcours Assistant — ACDC <small>Assistant Code et Développement C</small></h3>
-              <p class="tl-desc">
-                Je passe de l'autre côté du tableau :
-                <strong>je donne des cours de programmation</strong> (Python, C)
-                aux élèves des classes inférieures.
+          </div>
+
+          <!-- ACDC : pas une étape après les autres — une voie parallèle,
+               menée pendant la première année du cycle. -->
+          <div class="rule rule-second io">
+            <h3 class="rule-title">En parallèle — Assistant ACDC</h3>
+            <p class="rule-note">
+              Assistant Code et Développement C · mené pendant la première
+              année du cycle ingénieur, pas après.
+            </p>
+          </div>
+          <div class="acdc">
+            <p class="tl-desc io">
+              Je passe de l'autre côté du tableau :
+              <strong>je donne des cours de programmation</strong> (Python, C)
+              aux élèves des classes inférieures.
+            </p>
+            <ul class="points io" style="--d: 0.08s">
+              <li>Encadrement pédagogique d'une classe d'environ 40 étudiants, en binôme</li>
+              <li>Animation de séances et accompagnement à la programmation</li>
+              <li>Relecture, validation et amélioration de sujets de TP</li>
+              <li>Aide à la compréhension, au débogage et à la méthodologie</li>
+            </ul>
+            <blockquote class="pull io" style="--d: 0.16s">
+              <p>
+                Mon objectif : que <b>tous</b> les élèves comprennent la leçon
+                — pas la moyenne, tous. Un groupe de première année m'a même
+                interviewé pour son cours de méthodologie : être
+                étudiant-assistant qui vise le cyber, et ma vision de la place
+                de l'IA dans le domaine.
               </p>
-              <ul class="points">
-                <li>Encadrement pédagogique d'une classe d'environ 40 étudiants, en binôme</li>
-                <li>Animation de séances et accompagnement à la programmation</li>
-                <li>Relecture, validation et amélioration de sujets de TP</li>
-                <li>Aide à la compréhension, au débogage et à la méthodologie</li>
-              </ul>
-              <blockquote class="pull io" style="--d: 0.5s">
-                <p>
-                  Mon objectif : que <b>tous</b> les élèves comprennent la leçon
-                  — pas la moyenne, tous. Un groupe de première année m'a même
-                  interviewé pour son cours de méthodologie : être
-                  étudiant-assistant qui vise le cyber, et ma vision de la place
-                  de l'IA dans le domaine.
-                </p>
-                <cite>— L'interview dont je suis le plus fier ne parle pas de code.</cite>
-              </blockquote>
-            </div>
+              <cite>— L'interview dont je suis le plus fier ne parle pas de code.</cite>
+            </blockquote>
           </div>
         </div>
       </section>
@@ -1818,7 +1858,7 @@
           about:
             "<p>Le C est la colonne vertébrale du cursus EPITA — et le langage dans lequel j'ai construit mes projets les plus formateurs, puis <strong>enseigné</strong> à mon tour.</p>",
           points: [
-            "Validation de la « Piscine C » de l'EPITA",
+            "Validation de la « Piscine C » de l'EPITA — assez longue pour compter deux « rushs », les projets concrets qui clôturent une piscine",
             "Création d'un shell POSIX (42sh)",
             "Implémentation simplifiée de GNU Make",
             "OCR : résolveur de jeux de mots mêlés",
@@ -1858,6 +1898,7 @@
           points: [
             "home.jularthus.fr : la pile entière en Docker Compose — un seul fichier décrit conteneurs, réseau et volumes",
             "Cours IDVOC de l'EPITA — dont la supervision Prometheus + Grafana du serveur",
+            "Réflexe pris au passage : chaque outil que je crée est pensé pour être conteneurisable",
           ],
         },
         {
@@ -1868,17 +1909,30 @@
             "<p>Un langage pratiqué dans la durée, entre rigueur hebdomadaire et <strong>projet d'équipe</strong> mené jusqu'au bout.</p>",
           points: [
             "Exercices algorithmiques hebdomadaires, sur une période d'un an",
-            "ndot — jeu vidéo développé en équipe de 5 · <a href=\"https://shinyduckstudio.fr/ndot\" target=\"_blank\" rel=\"noopener noreferrer\">shinyduckstudio.fr/ndot ↗</a>",
+            "<i>New Dog, Old Tricks</i> — jeu vidéo développé en équipe de 5 · <a href=\"https://shinyduckstudio.fr/ndot\" target=\"_blank\" rel=\"noopener noreferrer\">shinyduckstudio.fr/ndot ↗</a>",
           ],
         },
         {
-          name: "PostgreSQL · Java · C++ · JS",
+          name: "Java",
+          tag: "Langage",
+          desc: "De la piscine aux backends en couches.",
+          about:
+            "<p>Découvert au format piscine, puis pratiqué sur de vrais projets : un agent autonome d'abord, un <strong>backend structuré</strong> ensuite.</p>",
+          points: [
+            "Semaine de piscine — exercices intensifs",
+            "« Creeps » — implémentation d'un agent autonome dans un jeu vidéo existant, via son API officielle",
+            "« JWS » — serveur backend en Quarkus, architecture en couches (présentation, service, repository), données stockées dans PostgreSQL",
+          ],
+        },
+        {
+          name: "PostgreSQL · C++ · JS",
           tag: "Piscines",
-          desc: "Quatre technos, même méthode : une semaine, en immersion.",
+          desc: "Trois technos, même méthode : une semaine, en immersion.",
           about:
             "<p>Le format « piscine » de l'EPITA : une techno, une semaine, des exercices du matin au soir. Intense, mais <strong>ça rentre</strong>.</p>",
           points: [
             "Une semaine d'exercices intensifs de type « piscine » par techno",
+            "Un « rush » en clôture de chaque piscine : un projet concret pour mettre en pratique ce qui vient d'être appris",
           ],
         },
       ];
