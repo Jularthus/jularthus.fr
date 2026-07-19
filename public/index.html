@@ -798,16 +798,26 @@
         color: var(--ikb-lift);
         letter-spacing: 0.04em;
       }
-      /* Le repère du présent : une petite flèche rouge, posée de travers. */
-      .tl-here {
-        display: inline-block;
-        font-family: var(--mono);
-        font-size: 11px;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--red);
-        white-space: nowrap;
-        rotate: -2deg;
+      /* Le repère du présent : l'étape en cours est surlignée — un
+         trait de marqueur IKB, légèrement de travers, qui se déploie
+         derrière le texte quand le nœud s'allume. transform only. */
+      .tl-now {
+        position: relative;
+        z-index: 0;
+      }
+      .tl-now::before {
+        content: "";
+        position: absolute;
+        inset: 0.14em -0.28em -0.02em -0.24em;
+        z-index: -1;
+        background: color-mix(in srgb, var(--ikb-lift) 20%, transparent);
+        rotate: -0.6deg;
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.7s var(--ease) 0.35s;
+      }
+      .tl-item.in .tl-now::before {
+        transform: scaleX(1);
       }
       .tl-desc {
         margin-top: 8px;
@@ -1354,6 +1364,17 @@
         .caret {
           animation: blink 1.8s var(--ease) infinite;
         }
+        .io {
+          opacity: 1;
+          transform: none;
+        }
+        .tl-item::before {
+          background: var(--red);
+          border-color: var(--red);
+        }
+        .tl-now::before {
+          transform: none;
+        }
       </style>
     </noscript>
     <header class="hero shell" id="top">
@@ -1389,7 +1410,8 @@
             <div class="about-text io" style="--d: 0.08s">
               <p>
                 Je m'appelle <strong>Jules-Arthus</strong>. Je viens de
-                <strong>Nancy</strong> — lycée à <strong>La Malgrange</strong> —
+                <strong>Nancy</strong> — collège-lycée à
+                <strong>La Malgrange</strong> —
                 et je fais aujourd'hui mes études d'ingénieur en informatique à
                 l'<strong>EPITA, à Strasbourg</strong>.
               </p>
@@ -1403,8 +1425,9 @@
                 laisser au hasard.
               </p>
               <p>
-                On me dit sympathique, ouvert, un peu drôle — je prends. Mais la
-                partie du portrait que je défends vraiment, c'est l'autre :
+                On me dit sympathique, ouvert, un peu drôle — parfois même
+                «&nbsp;cool, génial et branché&nbsp;». Mais la partie du
+                portrait que je défends vraiment, c'est l'autre :
                 sérieux dans le travail, efficace, et
                 <strong>fiable</strong>. Le genre de personne à qui on confie les
                 clés, et qui les rend avec un double étiqueté.
@@ -1553,17 +1576,20 @@
           <div class="timeline">
             <div class="tl-item io" style="--d: 0s">
               <div class="tl-period">Nancy</div>
-              <h3 class="tl-title">Lycée La Malgrange</h3>
+              <h3 class="tl-title">Collège-lycée La Malgrange</h3>
               <p class="tl-desc">
-                Le bac, la Section Euro allemand — et les premiers scripts
-                Python, écrits, il faut l'avouer, pendant les cours.
+                Le bac <strong>avec mention</strong> — spécialités
+                <strong>NSI</strong>, Physique-Chimie et Maths, option Maths
+                expertes — et la Section Euro allemand. Sans oublier les
+                premiers scripts Python, écrits, il faut l'avouer, pendant les
+                cours.
               </p>
             </div>
             <div class="tl-item io" style="--d: 0.1s">
               <div class="tl-period">Strasbourg · 2 ans</div>
               <h3 class="tl-title">EPITA — classes préparatoires <small>ingénierie informatique</small></h3>
               <p class="tl-desc">
-                Deux ans de prépa intégrée : les maths, la Piscine C, les nuits
+                Deux ans de prépa intégrée : les maths, les projets, les nuits
                 courtes — et la certitude d'être exactement au bon endroit.
               </p>
             </div>
@@ -1578,12 +1604,11 @@
             <div class="tl-item io" style="--d: 0.3s">
               <div class="tl-period">Strasbourg · 3 ans</div>
               <h3 class="tl-title">
-                EPITA — cycle ingénieur
+                <span class="tl-now">EPITA — cycle ingénieur</span>
                 <small>
                   <svg class="lock" width="11" height="13" viewBox="0 0 11 13" fill="none" aria-hidden="true"><rect x="0.75" y="5.25" width="9.5" height="7" stroke="currentColor" stroke-width="1.5"/><path d="M2.75 5V3.5a2.75 2.75 0 0 1 5.5 0V5" stroke="currentColor" stroke-width="1.5"/></svg>
                   majeure SRS
                 </small>
-                <span class="tl-here">← vous êtes ici</span>
               </h3>
               <p class="tl-desc">
                 Spécialisation choisie : la majeure
