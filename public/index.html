@@ -256,7 +256,7 @@
       }
       .hero-caption {
         margin-top: clamp(16px, 2.5vw, 26px);
-        font-size: 18px;
+        font-size: clamp(19px, 2.3vw, 25px);
         color: var(--ink-soft);
         opacity: 0;
       }
@@ -828,13 +828,6 @@
       .tl-desc strong {
         color: var(--ink);
         font-weight: 600;
-      }
-      /* Cadenas minimaliste — la seule icône de la page, posée là où
-         la sécurité devient le sujet. */
-      .lock {
-        display: inline-block;
-        vertical-align: -1px;
-        color: var(--ikb-lift);
       }
 
       .acdc {
@@ -1539,7 +1532,7 @@
                 pendant les cours au lycée, devenu un serveur entier —
                 médiathèque, automatisation, supervision — hébergé, maintenu et
                 parfois cassé à la main. C'est lui qui m'a le plus appris à
-                coder ; le site raconte tout, service par service.
+                coder ; le site raconte tout, service par service. <strong>Beaucoup de mes sous-projets sont listés ici, alors soyez curieux et venez les découvrir !</strong>
               </p>
               <a
                 class="cta"
@@ -1598,26 +1591,26 @@
               <h3 class="tl-title">Erasmus — Unicorn University</h3>
               <p class="tl-desc">
                 Un semestre d'échange à Prague : cours en anglais, autre culture,
-                mêmes bugs. On revient avec un accent et de la perspective.
+                mêmes bugs. C'est aussi là que mon
+                <strong>serveur multimédia</strong> a vraiment pris son envol —
+                beaucoup de nouvelles fonctionnalités, et un projet devenu
+                nettement plus sérieux. On revient avec un accent, de la
+                perspective, et un serveur qui tient la route.
               </p>
             </div>
             <div class="tl-item io" style="--d: 0.3s">
               <div class="tl-period">Strasbourg · 3 ans</div>
               <h3 class="tl-title">
                 <span class="tl-now">EPITA — cycle ingénieur</span>
-                <small>
-                  <svg class="lock" width="11" height="13" viewBox="0 0 11 13" fill="none" aria-hidden="true"><rect x="0.75" y="5.25" width="9.5" height="7" stroke="currentColor" stroke-width="1.5"/><path d="M2.75 5V3.5a2.75 2.75 0 0 1 5.5 0V5" stroke="currentColor" stroke-width="1.5"/></svg>
-                  majeure SRS
-                </small>
+                <small>majeure SRS</small>
               </h3>
               <p class="tl-desc">
-                Spécialisation choisie : la majeure
-                <strong>SRS — Systèmes, Réseaux &amp; Sécurité</strong>.
-                Autrement dit, la <strong>cybersécurité</strong> : celle qui
-                m'occupe la tête depuis le début, désormais au programme.
                 Première étape franchie : j'ai survécu à l'ING1 —
                 <strong>zéro rattrapage</strong> au compteur. La fiabilité, ça
-                commence par ses propres partiels.
+                commence par ses propres examens. Spécialisation choisie : la
+                majeure <strong>SRS — Systèmes, Réseaux &amp; Sécurité</strong>.
+                Autrement dit, la <strong>cybersécurité</strong> : celle qui
+                m'occupe la tête depuis le début, désormais au programme.
               </p>
             </div>
           </div>
@@ -1628,7 +1621,7 @@
             <h3 class="rule-title">En parallèle — Assistant ACDC</h3>
             <p class="rule-note">
               Assistant Code et Développement C · mené pendant la première
-              année du cycle ingénieur, pas après.
+              année du cycle ingénieur.
             </p>
           </div>
           <div class="acdc">
@@ -1645,8 +1638,8 @@
             </ul>
             <blockquote class="pull io" style="--d: 0.16s">
               <p>
-                Mon objectif : que <b>tous</b> les élèves comprennent la leçon
-                — pas la moyenne, tous. Un groupe de première année m'a même
+                Mon objectif : que <b>tous</b> les élèves comprennent les
+                concepts de la semaine (TP) — pas la moyenne, tous. Un groupe de première année m'a même
                 interviewé pour son cours de méthodologie : être
                 étudiant-assistant qui vise le cyber, et ma vision de la place
                 de l'IA dans le domaine.
@@ -1874,6 +1867,7 @@
           points: [
             "Utilisation quotidienne optimisée",
             "Plugins et configuration personnalisée",
+            "Ma configuration est publique · <a href=\"https://github.com/Jularthus/dotfiles-i3\" target=\"_blank\" rel=\"noopener noreferrer\">github.com/Jularthus/dotfiles-i3 ↗</a>",
           ],
         },
         {
@@ -1898,7 +1892,7 @@
           about:
             "<p>Le langage de mes automatisations : quand une tâche revient deux fois, elle devient un <strong>outil Python</strong> qui tourne tout seul.</p>",
           points: [
-            "YTDL — téléchargeur de vidéos YouTube fait maison",
+            "YTDL — téléchargeur de vidéos YouTube fait maison · <a href=\"https://github.com/Jularthus/YTDL-Server\" target=\"_blank\" rel=\"noopener noreferrer\">github.com/Jularthus/YTDL-Server ↗</a>",
             "Générateur de rapports, pour le parcours Assistant EPITA (ACDC)",
             "Serveur d'impression de fichiers (OS X)",
           ],
@@ -1911,7 +1905,8 @@
             "<p>Là où quelques lignes suffisent, pas besoin de plus : le shell est mon outil de <strong>mise en place et d'outillage</strong>.</p>",
           points: [
             "Scripts de configuration de systèmes",
-            "Générateur de trace XML pour test-suite générique",
+            "<i>L9_M0ULiN3TTE</i> — formateur pour testsuites Bash : génère un rapport XML lisible dans l'intra de l'école, pour voir d'un coup d'œil quels tests passent et quels tests échouent · <a href=\"https://github.com/Jularthus/L9_M0ULiN3TTE\" target=\"_blank\" rel=\"noopener noreferrer\">github.com/Jularthus/L9_M0ULiN3TTE ↗</a>",
+            "Si bien documenté et si propre que les assistants ACU ont cru à de la triche — une soutenance d'explication plus tard, ils en sont restés bouche bée",
           ],
         },
         {
@@ -1923,6 +1918,7 @@
           points: [
             "home.jularthus.fr : la pile entière en Docker Compose — un seul fichier décrit conteneurs, réseau et volumes",
             "Cours IDVOC de l'EPITA — dont la supervision Prometheus + Grafana du serveur",
+            "<i>DevDocker</i> — un environnement Linux fiable et reproductible pour travailler à l'EPITA depuis macOS, quand un exercice exige un vrai Linux · <a href=\"https://github.com/Jularthus/DevDocker\" target=\"_blank\" rel=\"noopener noreferrer\">github.com/Jularthus/DevDocker ↗</a>",
             "Réflexe pris au passage : chaque outil que je crée est pensé pour être conteneurisable",
           ],
         },
@@ -1958,6 +1954,7 @@
           points: [
             "Une semaine d'exercices intensifs de type « piscine » par techno",
             "Un « rush » en clôture de chaque piscine : un projet concret pour mettre en pratique ce qui vient d'être appris",
+            "Côté JS : <i>AuCoin</i> · <a href=\"https://github.com/Jularthus/AuCoin\" target=\"_blank\" rel=\"noopener noreferrer\">github.com/Jularthus/AuCoin ↗</a>",
           ],
         },
       ];
