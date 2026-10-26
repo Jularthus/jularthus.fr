@@ -1,0 +1,114 @@
+// Portfolio checks: screenshots, console errors, horizontal scroll,
+// em dash scan (FR + EN), reduced motion, no-JS.
+// Usage: node check.js [baseURL] [outDir]
+const { chromium } = require("playwright");
+const fs = require("fs");
+const BASE = process.argv[2] || "http://127.0.0.1:8787/";
+const OUT = process.argv[3] || __dirname + "/out";
+fs.mkdirSync(OUT, { recursive: true });
+
+async function crawl(p) {
+  const h = await p.evaluate(() => document.documentElement.scrollHeight);
+  for (let y = 0; y < h; y += 500) {
+    await p.evaluate((y) => window.scrollTo(0, y), y);
+    await p.waitForTimeout(120);
+  }
+  await p.waitForTimeout(800);
+}
+
+(async () => {
+  const b = await chromium.launch({ args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"] });
+  const report = [];
+  const runs = [
+    { name: "desk-light", vp: { width: 1440, height: 900 }, scheme: "light" },
+    { name: "desk-dark", vp: { width: 1440, height: 900 }, scheme: "dark" },
+    { name: "tablet", vp: { width: 768, height: 1024 }, scheme: "light" },
+    { name: "mobile", vp: { width: 390, height: 844 }, scheme: "light", mobile: true },
+    { name: "reduced", vp: { width: 1440, height: 900 }, scheme: "light", reduced: true },
+    { name: "nojs", vp: { width: 1440, height: 900 }, scheme: "light", nojs: true },
+  ];
+  for (const r of runs) {
+    const ctx = await b.newContext({
+      viewport: r.vp,
+      colorScheme: r.scheme,
+      reducedMotion: r.reduced ? "reduce" : "no-preference",
+      javaScriptEnabled: !r.nojs,
+      isMobile: !!r.mobile,
+      hasTouch: !!r.mobile,
+      locale: "fr-FR",
+    });
+    const p = await ctx.newPage();
+    const errs = [];
+    p.on("console", (m) => m.type() === "error" && errs.push(m.text()));
+    p.on("pageerror", (e) => errs.push("pageerror: " + e.message));
+    await p.goto(BASE, { waitUntil: "networkidle" });
+    await p.waitForTimeout(2600);
+    await p.screenshot({ path: `${OUT}/${r.name}-hero.png` });
+    await crawl(p);
+    const hscroll = await p.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+    const wide = await p.evaluate(() =>
+      [...document.querySelectorAll("body *")]
+        .filter((e) => {
+          const b = e.getBoundingClientRect();
+          return b.right > window.innerWidth + 1 && getComputedStyle(e).position !== "fixed" && !e.closest(".gallery-track, .nav-links, .sel-pin");
+        })
+        .slice(0, 5)
+        .map((e) => e.tagName + "." + e.className)
+    );
+    await p.evaluate(() => window.scrollTo(0, 0));
+    await p.waitForTimeout(500);
+    await p.screenshot({ path: `${OUT}/${r.name}-full.png`, fullPage: true });
+    const dash = await p.evaluate(() => {
+      const t = document.body.innerText + document.title + [...document.querySelectorAll("meta[content]")].map((m) => m.content).join(" ");
+      return (t.match(/.{0,30}—.{0,30}/g) || []).slice(0, 5);
+    });
+    report.push({ run: r.name, errors: errs, hscroll, wide, emdash: dash });
+    await ctx.close();
+  }
+
+  // English pass: toggle, check strings and em dashes, including generated content.
+  {
+    const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, locale: "en-US" });
+    const p = await ctx.newPage();
+    const errs = [];
+    p.on("pageerror", (e) => errs.push("pageerror: " + e.message));
+    p.on("console", (m) => m.type() === "error" && errs.push(m.text()));
+    await p.goto(BASE, { waitUntil: "networkidle" });
+    await p.waitForTimeout(2600);
+    const lang = await p.evaluate(() => document.documentElement.lang);
+    await crawl(p);
+    await p.screenshot({ path: `${OUT}/en-hero.png` });
+    // open each skill sheet and collect text
+    const sheetText = await p.evaluate(async () => {
+      let all = "";
+      for (const b of document.querySelectorAll(".skill")) {
+        b.click();
+        await new Promise((r) => setTimeout(r, 80));
+        all += document.getElementById("sheet").innerText + "\n";
+        document.getElementById("sheet").close();
+      }
+      return all;
+    });
+    const t = await p.evaluate(() => document.body.innerText + document.title);
+    const frLeft = (t.match(/\b(Qui je suis|Le parcours|Voir les projets|comment je l'ai appris|Écrire un e-mail)\b/g) || []);
+    const dash = ((t + sheetText).match(/.{0,30}—.{0,30}/g) || []).slice(0, 5);
+    // FR sheets too
+    await p.click('[data-set-lang="fr"]');
+    await p.waitForTimeout(600);
+    const frSheet = await p.evaluate(async () => {
+      let all = "";
+      for (const b of document.querySelectorAll(".skill")) {
+        b.click();
+        await new Promise((r) => setTimeout(r, 80));
+        all += document.getElementById("sheet").innerText + "\n";
+        document.getElementById("sheet").close();
+      }
+      return all;
+    });
+    const frDash = (frSheet.match(/.{0,30}—.{0,30}/g) || []).slice(0, 5);
+    report.push({ run: "english", autoLang: lang, errors: errs, frenchLeftInEN: frLeft, emdash: dash, frSheetEmdash: frDash });
+    await ctx.close();
+  }
+  await b.close();
+  console.log(JSON.stringify(report, null, 1));
+})();

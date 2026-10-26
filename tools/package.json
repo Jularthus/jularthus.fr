@@ -1,0 +1,20 @@
+{
+  "name": "jularthus-tools",
+  "version": "1.0.0",
+  "description": "Preview, tests and generated images for jularthus.fr",
+  "scripts": {
+    "serve": "python3 -m http.server 8787 --bind 127.0.0.1 --directory ../public",
+    "check": "node check.js",
+    "interact": "node term.js",
+    "csp": "node csp.js",
+    "render": "node render.js",
+    "stamp": "python3 stamp-assets.py",
+    "lighthouse": "mkdir -p reports && CHROME_PATH=$(node -e \"console.log(require('playwright').chromium.executablePath())\") lighthouse http://127.0.0.1:8787/ --quiet --chrome-flags='--headless=new --no-sandbox' --output=html --output-path=reports/lighthouse.html"
+  },
+  "type": "commonjs",
+  "devDependencies": {
+    "lighthouse": "^12.8.2",
+    "playwright": "^1.64.1"
+  },
+  "private": true
+}

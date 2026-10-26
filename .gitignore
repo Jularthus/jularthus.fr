@@ -1,3 +1,7 @@
 .*.swp
 *~
 node_modules/
+tools/out/
+tools/reports/
+# not part of the site's history, but kept reachable on the server
+/public/wifi.sh
