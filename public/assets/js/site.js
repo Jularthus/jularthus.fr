@@ -307,10 +307,14 @@
       runCounters();
       return;
     }
+    /* Same red dot as the brand mark, kept while typing. */
+    function paint(t) {
+      typed.innerHTML = esc(t).replace(/\./g, '<span class="dot">.</span>');
+    }
     typed.textContent = "";
     var i = 0;
     setTimeout(function tick() {
-      typed.textContent = word.slice(0, ++i);
+      paint(word.slice(0, ++i));
       if (i < word.length) setTimeout(tick, 70 + Math.random() * 60);
       else
         setTimeout(function () {

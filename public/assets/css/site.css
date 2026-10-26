@@ -445,6 +445,9 @@ kbd {
   white-space: nowrap;
   color: #fff;
 }
+.hero-type .dot {
+  color: var(--red);
+}
 .caret {
   display: inline-block;
   width: 0.5ch;
