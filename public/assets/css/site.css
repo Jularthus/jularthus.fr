@@ -903,6 +903,15 @@ footer :focus-visible,
   left: 0;
   top: 0;
 }
+.latios-still {
+  position: fixed;
+  z-index: 400;
+  width: 160px;
+  pointer-events: none;
+  right: 8vw;
+  bottom: 16vh;
+  rotate: 7deg;
+}
 
 /* ============================================================
    02 · FLAGSHIP: full IKB field

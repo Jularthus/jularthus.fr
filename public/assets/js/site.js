@@ -1266,14 +1266,28 @@
     pin.addEventListener("pointercancel", drop);
 
     /* ↑ ↑ ↓ ↓ ← → ← → B A */
-    var KONAMI = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
-    var k = 0;
+    var KONAMI = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"].join(" ");
+    var recent = [];
     document.addEventListener("keydown", function (e) {
-      var key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
-      k = key === KONAMI[k] ? k + 1 : key === KONAMI[0] ? 1 : 0;
-      if (k < KONAMI.length) return;
-      k = 0;
-      if (!G || REDUCED) return toast("Latios ✦");
+      if (e.repeat || /^(Shift|Control|Alt|AltGraph|Meta|CapsLock|Fn)$/.test(e.key)) return;
+      /* Match the last ten keys, so stray or doubled presses don't reset it. */
+      recent.push(e.key.length === 1 ? e.key.toLowerCase() : e.key);
+      if (recent.length > 10) recent.shift();
+      if (recent.join(" ") !== KONAMI) return;
+      recent = [];
+      toast("Latios ✦");
+      if (!G || REDUCED) {
+        /* Reduced motion: Latios still shows up, it just doesn't fly. */
+        var still = document.createElement("img");
+        still.src = $("#latios img").src;
+        still.alt = "";
+        still.className = "pin latios-still";
+        document.body.appendChild(still);
+        setTimeout(function () {
+          still.remove();
+        }, 2400);
+        return;
+      }
       var img = document.createElement("img");
       img.src = $("#latios img").src;
       img.alt = "";
@@ -1298,7 +1312,6 @@
           img.remove();
         },
       });
-      toast("Latios ✦");
     });
   })();
 
