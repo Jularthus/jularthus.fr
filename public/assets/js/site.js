@@ -1196,18 +1196,19 @@
      MICRO-INTERACTIONS: magnetic buttons, caret cursor, Latios.
      ============================================================== */
   if (G && FINE && !REDUCED) {
+    /* A light lean toward the cursor (a few px at most), no spring. */
     $$(".magnetic").forEach(function (el) {
       el.addEventListener("pointermove", function (e) {
         var r = el.getBoundingClientRect();
         G.to(el, {
-          x: (e.clientX - (r.left + r.width / 2)) * 0.22,
-          y: (e.clientY - (r.top + r.height / 2)) * 0.32,
-          duration: 0.4,
-          ease: "power3.out",
+          x: (e.clientX - (r.left + r.width / 2)) * 0.08,
+          y: (e.clientY - (r.top + r.height / 2)) * 0.12,
+          duration: 0.5,
+          ease: "power2.out",
         });
       });
       el.addEventListener("pointerleave", function () {
-        G.to(el, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.4)" });
+        G.to(el, { x: 0, y: 0, duration: 0.45, ease: "power2.out" });
       });
     });
 
