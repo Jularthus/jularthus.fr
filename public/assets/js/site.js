@@ -890,7 +890,7 @@
   }
 
   /* ==============================================================
-     SKILLS: fill from the entry point; the sheet grows out of the
+     SKILLS: the sheet grows out of the
      card that was clicked (FLIP), inside a native <dialog>.
      ============================================================== */
   var sheet = $("#sheet");
@@ -898,11 +898,6 @@
   var currentSkill = null;
 
   $$(".skill").forEach(function (b) {
-    b.addEventListener("pointerenter", function (e) {
-      var r = b.getBoundingClientRect();
-      b.style.setProperty("--x", ((e.clientX - r.left) / r.width) * 100 + "%");
-      b.style.setProperty("--y", ((e.clientY - r.top) / r.height) * 100 + "%");
-    });
     b.addEventListener("click", function () {
       openSheet(b.dataset.skill, b);
     });

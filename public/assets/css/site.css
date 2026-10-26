@@ -1633,7 +1633,8 @@ html:not(.js) .term-body {
 }
 
 /* ============================================================
-   04 · STACK: the IKB fill grows from where the cursor came in.
+   04 · STACK: hovering a skill brings it into focus; the others
+   soften and blur slightly, like a camera pulling focus.
    ============================================================ */
 .skills {
   display: grid;
@@ -1653,7 +1654,6 @@ html:not(.js) .term-body {
 }
 .skill {
   position: relative;
-  isolation: isolate;
   overflow: hidden;
   text-align: left;
   background: none;
@@ -1666,24 +1666,28 @@ html:not(.js) .term-body {
   flex-direction: column;
   gap: 8px;
   min-height: 196px;
-  transition: color 0.35s var(--ease);
 }
-.skill::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: var(--ikb);
-  clip-path: circle(0% at var(--x, 50%) var(--y, 50%));
-  transition: clip-path 0.55s var(--ease);
-}
-.skill:hover::before,
-.skill:focus-visible::before {
-  clip-path: circle(150% at var(--x, 50%) var(--y, 50%));
+/* Once revealed, hover reacts at once (no reveal delay) and gently. */
+.skills .skill.in {
+  transition:
+    opacity 0.45s var(--ease),
+    filter 0.45s var(--ease),
+    background-color 0.45s var(--ease);
+  transition-delay: 0s;
 }
 .skill:hover,
 .skill:focus-visible {
-  color: #fff;
+  background-color: color-mix(in srgb, var(--ink) 3%, transparent);
+}
+@media (hover: hover) {
+  .skills:has(.skill:hover) .skill:not(:hover) {
+    opacity: 0.5;
+    filter: blur(1.5px);
+  }
+}
+.skills:has(.skill:focus-visible) .skill:not(:focus-visible) {
+  opacity: 0.5;
+  filter: blur(1.5px);
 }
 .skill::after {
   content: "";
@@ -1706,7 +1710,6 @@ html:not(.js) .term-body {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-soft);
-  transition: color 0.35s;
 }
 .skill-name {
   font-family: var(--display);
@@ -1718,15 +1721,6 @@ html:not(.js) .term-body {
   font-size: 15px;
   line-height: 1.55;
   color: var(--ink-soft);
-  transition: color 0.35s;
-}
-.skill:hover .skill-tag,
-.skill:focus-visible .skill-tag {
-  color: rgba(255, 255, 255, 0.62);
-}
-.skill:hover .skill-desc,
-.skill:focus-visible .skill-desc {
-  color: rgba(255, 255, 255, 0.8);
 }
 .skill-more {
   margin-top: auto;
@@ -1739,11 +1733,10 @@ html:not(.js) .term-body {
 }
 .skill-more .arrow {
   color: var(--red);
-  transition: transform 0.35s var(--ease), color 0.35s;
+  transition: transform 0.35s var(--ease);
 }
 .skill:hover .skill-more .arrow,
 .skill:focus-visible .skill-more .arrow {
-  color: #fff;
   transform: translateX(3px);
 }
 html:not(.js) .skill-more {
