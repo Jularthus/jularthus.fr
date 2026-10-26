@@ -127,7 +127,7 @@ window.SITE_DATA = (function () {
     "also.bn": "workshop for the 2024 Fête de la Science",
 
     "path.eyebrow": "03 · Journey",
-    "path.title": "The journey",
+    "path.title": 'The journey<span class="dot">.</span>',
     "path.note": "From Nancy to Paris, through Strasbourg, Prague and Luxembourg. And along the way, a move to the other side of the classroom.",
     "tl.1.when": "Nancy · high school",
     "tl.1.desc": "Baccalauréat <strong>with honours</strong>, majoring in <strong>Computer Science</strong>, Physics-Chemistry and Maths, with advanced maths and the European German section. Not to mention the first Python scripts, written, I admit, during class.",

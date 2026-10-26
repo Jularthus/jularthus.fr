@@ -109,6 +109,35 @@ async function crawl(p) {
     report.push({ run: "english", autoLang: lang, errors: errs, frenchLeftInEN: frLeft, emdash: dash, frSheetEmdash: frDash });
     await ctx.close();
   }
+  // Language round trip: switch after every animation has played (titles
+  // split and rebuilt, decrypts done), then compare with a fresh load.
+  {
+    const SEL = "h1, h2, h3, nav a, .eyebrow, .tl-period, .band-note, .rule-note, .proof dd, .skill-name, .pcard-pitch";
+    const texts = (p) => p.evaluate((sel) => [...document.querySelectorAll(sel)].map((e) => e.innerText.trim()), SEL);
+    for (const [from, to] of [["fr", "en"], ["en", "fr"]]) {
+      const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, locale: from === "fr" ? "fr-FR" : "en-US" });
+      const p = await ctx.newPage();
+      const errs = [];
+      p.on("pageerror", (e) => errs.push("pageerror: " + e.message));
+      p.on("console", (m) => m.type() === "error" && !/404/.test(m.text()) && errs.push(m.text()));
+      await p.goto(BASE, { waitUntil: "networkidle" });
+      await p.waitForTimeout(2600);
+      await crawl(p);
+      await p.waitForTimeout(1500);
+      await p.click(`[data-set-lang="${to}"]`);
+      await p.waitForTimeout(800);
+      const switched = await texts(p);
+      const fresh = await ctx.newPage();
+      await fresh.goto(BASE + "?lang=" + to, { waitUntil: "networkidle" });
+      await fresh.waitForTimeout(2600);
+      await crawl(fresh);
+      await fresh.waitForTimeout(1500);
+      const expected = await texts(fresh);
+      const diffs = switched.map((t, i) => (t !== expected[i] ? `${JSON.stringify(t)} != ${JSON.stringify(expected[i])}` : null)).filter(Boolean);
+      report.push({ run: `switch ${from}->${to}`, errors: errs, mismatches: diffs.slice(0, 8) });
+      await ctx.close();
+    }
+  }
   await b.close();
   console.log(JSON.stringify(report, null, 1));
 })();

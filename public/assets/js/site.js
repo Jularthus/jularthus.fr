@@ -73,6 +73,9 @@
     });
     lang = l;
     FR_HTML.forEach(function (_, el) {
+      /* An animation that rebuilt an element would leave it untranslatable:
+         say so loudly (the test suite fails on console errors). */
+      if (!el.isConnected) console.error("i18n: detached element for " + (el.dataset.i18n || el.dataset.i18nHtml));
       var v = tr(el);
       if (v != null && el.innerHTML !== v) el.innerHTML = v;
     });
