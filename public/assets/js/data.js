@@ -36,7 +36,7 @@ window.SITE_DATA = (function () {
     "nav.lang": "Language",
 
     "hero.caption": '<span class="hero-name">Jules-Arthus Klein</span>, engineering student at EPITA Paris, majoring in Systems, Networks &amp; Security.',
-    "hero.tagline": "I build, I automate, I secure. My server has been running in production since 2022.",
+    "hero.tagline": "I build, I automate, I secure.",
     "hero.cta1": "See the projects",
     "hero.cta2": "Get in touch",
     "hero.scroll": "Scroll down",
@@ -45,7 +45,7 @@ window.SITE_DATA = (function () {
     "proof.selfhosted": "self-hosted, since 2022",
     "proof.langs": "programming languages, and more to come",
     "proof.students": "students taught at EPITA as an assistant",
-    "proof.devdocker": "stars on DevDocker, used by fellow students",
+    "proof.devdocker": "stars on a hand-crafted tool, used by fellow students",
 
     "about.eyebrow": "01 · About",
     "about.title": "Who I am",
