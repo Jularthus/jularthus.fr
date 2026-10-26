@@ -1277,42 +1277,6 @@ html:not(.js) .term-body {
 .ascii-term .a-ok {
   color: #7fffb0;
 }
-.pcard-game {
-  background: linear-gradient(#2c3e8f, #5b86ff 70%);
-  display: grid;
-  place-items: center;
-  image-rendering: pixelated;
-}
-.pcard-game .dog {
-  width: 38%;
-  height: auto;
-  margin-top: 6%;
-  animation: hop 1.4s steps(2) infinite;
-}
-@keyframes hop {
-  50% {
-    transform: translateY(-6%);
-  }
-}
-.game-hud {
-  position: absolute;
-  top: 12px;
-  left: 14px;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  color: #fff;
-  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
-}
-.game-ground {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 22%;
-  background: repeating-linear-gradient(90deg, #3c8a3c 0 12px, #347a34 12px 24px);
-  border-top: 4px solid #5fbf5f;
-}
 .live-chip {
   position: absolute;
   left: 12px;

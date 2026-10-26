@@ -96,8 +96,12 @@ window.SITE_DATA = (function () {
     "p.aucoin.why": "<b>Why it matters:</b> born during the piscine to stay in touch with friends, and still online. Try it, I'll read it.",
     "tag.selfhosted": "Self-hosted",
     "p.live": "Live demo",
-    "p.ndot.pitch": "A video game built by a team of five in C#, from the first idea to a playable release.",
-    "p.ndot.why": "<b>Why it matters:</b> my first real team project. Planning, Git with five people, and compromises to hold until the final defense.",
+    "p.ndot.pitch": "A co-op pixel-art puzzle game built by five people in C#: two friends, one of them turned into a dog, and more than 30 puzzles in an increasingly hostile forest.",
+    "p.ndot.why": "<b>My role:</b> technical lead of the team. Keeping five people's code working together, from the first idea to the final defense.",
+    "p.ndot.alt": "New Dog, Old Tricks pixel-art title screen: a wooden sign above the forest",
+    "p.ndot.link": "Game website",
+    "p.ndot.href": "https://shinyduckstudio.fr/ndot_en/",
+    "tag.coop": "Co-op",
     "tag.team5": "Team of 5",
     "p.beers.alt": "Home page of the 1 million d'amis beer counter, in demo mode",
     "p.beers.pitch": "A group of friends counting their beers toward an absurd goal: one million. A Discord bot logs them, a public website turns the history into rankings, maps and records.",
@@ -397,11 +401,11 @@ window.SITE_DATA = (function () {
       points: {
         fr: [
           "Exercices algorithmiques hebdomadaires, pendant un an",
-          "<i>New Dog, Old Tricks</i> : jeu vidéo développé en équipe de 5 · " + link("https://shinyduckstudio.fr/ndot", "shinyduckstudio.fr/ndot"),
+          "<i>New Dog, Old Tricks</i> : jeu d'énigmes coopératif développé à 5, dont j'étais le responsable technique · " + link("https://shinyduckstudio.fr/ndot/", "shinyduckstudio.fr/ndot"),
         ],
         en: [
           "Weekly algorithm exercises, for a year",
-          "<i>New Dog, Old Tricks</i>: a video game built by a team of 5 · " + link("https://shinyduckstudio.fr/ndot", "shinyduckstudio.fr/ndot"),
+          "<i>New Dog, Old Tricks</i>: a co-op puzzle game built by a team of 5, where I was the technical lead · " + link("https://shinyduckstudio.fr/ndot_en/", "shinyduckstudio.fr/ndot_en"),
         ],
       },
     },
@@ -451,7 +455,7 @@ window.SITE_DATA = (function () {
     { slug: "devdocker", id: "p-devdocker", name: "DevDocker", url: GH + "DevDocker" },
     { slug: "l9", id: "p-l9", name: "L9_M0ULiN3TTE", url: GH + "L9_M0ULiN3TTE" },
     { slug: "aucoin", id: "p-aucoin", name: "AuCoin", url: "https://aucoin.jularthus.fr" },
-    { slug: "ndot", id: "p-ndot", name: "New Dog, Old Tricks", url: "https://shinyduckstudio.fr/ndot", keys: "jeu game unity" },
+    { slug: "ndot", id: "p-ndot", name: "New Dog, Old Tricks", url: "https://shinyduckstudio.fr/ndot/", keys: "jeu game coop pixel" },
     { slug: "beers", id: "p-beers", name: "1 million d'amis", url: "https://beers.jularthus.fr", keys: "bieres beer discord" },
   ];
 
