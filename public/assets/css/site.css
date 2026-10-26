@@ -594,6 +594,12 @@ footer :focus-visible,
 .proof dt small:first-child {
   margin: 0 2px 0 0;
 }
+.proof dt small.star {
+  font-size: 0.55em;
+  vertical-align: 0.3em;
+  color: #ffd166;
+  margin-right: 4px;
+}
 .proof dd {
   margin-top: 6px;
   font-family: var(--mono);
