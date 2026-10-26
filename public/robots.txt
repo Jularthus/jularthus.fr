@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jularthus.fr/sitemap.xml
