@@ -41,10 +41,10 @@ window.SITE_DATA = (function () {
     "hero.cta2": "Get in touch",
     "hero.scroll": "Scroll down",
 
-    "proof.since": "first lines of code",
+    "proof.since": "year of my first lines of code",
     "proof.selfhosted": "self-hosted, since 2022",
-    "proof.langs": "programming languages",
-    "proof.students": "students taught algorithms",
+    "proof.langs": "programming languages, and more to come",
+    "proof.students": "students taught at EPITA as an assistant",
     "proof.devdocker": "stars on DevDocker, used by fellow students",
 
     "about.eyebrow": "01 · About",
