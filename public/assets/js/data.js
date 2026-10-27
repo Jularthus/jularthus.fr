@@ -149,6 +149,10 @@ window.SITE_DATA = (function () {
 
     "duo.title": "Alongside · Assistant",
     "duo.note": "Two roles, two year groups: ACDC in ING1, YAKA today.",
+    "relay.aria": "The relay: in ING1 I teach year-1 students (ACDC), in ING2 I supervise ING1 students (YAKA).",
+    "relay.kicker": "The relay",
+    "relay.cap": "I was taught, now I pass it on: in ING1 to prep students, <span class=\"relay-c-acdc\">ACDC</span>; in ING2 to ING1 students, <span class=\"relay-c-yaka\">YAKA</span>.",
+    "relay.prep": "Prep",
     "duo.acdc.when": "ING1 · year 3 of 5",
     "duo.acdc.full": "C Programming and Development Assistant",
     "duo.acdc.intro": "I moved to the other side of the classroom: I teach <mark class=\"hl\">programming classes</mark> (Python, C) to prep students in <strong>year 1</strong> of the curriculum.",

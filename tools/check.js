@@ -112,7 +112,7 @@ async function crawl(p) {
   // Language round trip: switch after every animation has played (titles
   // split and rebuilt, decrypts done), then compare with a fresh load.
   {
-    const SEL = "h1, h2, h3, h4, nav a, .eyebrow, .tl-period, .band-note, .rule-note, .proof dd, .skill-name, .pcard-pitch, .duo-when, .duo-sub, .duo-list li, .duo-seal";
+    const SEL = "h1, h2, h3, h4, nav a, .eyebrow, .tl-period, .band-note, .rule-note, .proof dd, .skill-name, .pcard-pitch, .duo-when, .duo-sub, .duo-list li, .duo-seal, .relay-cap, .relay-years span";
     const texts = (p) => p.evaluate((sel) => [...document.querySelectorAll(sel)].map((e) => e.innerText.trim()), SEL);
     for (const [from, to] of [["fr", "en"], ["en", "fr"]]) {
       const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, locale: from === "fr" ? "fr-FR" : "en-US" });

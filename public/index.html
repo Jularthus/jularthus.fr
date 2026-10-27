@@ -32,7 +32,7 @@
 
     <link rel="preload" href="assets/fonts/dm-serif-display-italic.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="assets/css/site.css?v=2056b046" />
+    <link rel="stylesheet" href="assets/css/site.css?v=36b630db" />
 
     <script type="application/ld+json">
       {
@@ -479,6 +479,32 @@
             <p class="rule-note" data-i18n="duo.note">Deux rôles, deux promotions : ACDC en ING1, YAKA aujourd'hui.</p>
           </div>
 
+          <!-- The relay: who teaches whom across the 5 years. Each arc runs
+               from me to the students of that role, in the role's color. -->
+          <figure class="relay io" aria-label="Le relais : en ING1 j'enseigne aux élèves de 1re année (ACDC), en ING2 j'encadre les élèves d'ING1 (YAKA)." data-i18n-attr="aria-label:relay.aria">
+            <figcaption class="relay-cap">
+              <span class="relay-kicker" data-i18n="relay.kicker">Le relais</span>
+              <span data-i18n-html="relay.cap">On m'a appris, je transmets : en ING1 aux élèves de prépa, <span class="relay-c-acdc">ACDC</span> ; en ING2 aux élèves d'ING1, <span class="relay-c-yaka">YAKA</span>.</span>
+            </figcaption>
+            <div class="relay-stage" aria-hidden="true">
+              <svg class="relay-arcs" viewBox="0 0 100 40" preserveAspectRatio="none">
+                <path class="relay-arc arc-acdc" pathLength="1" d="M50 40 C 46 -2, 14 -2, 10 40" />
+                <path class="relay-flow arc-acdc" pathLength="1" d="M50 40 C 46 -2, 14 -2, 10 40" />
+                <path class="relay-arc arc-yaka" pathLength="1" d="M70 40 C 68 12, 52 12, 50 40" />
+                <path class="relay-flow arc-yaka" pathLength="1" d="M70 40 C 68 12, 52 12, 50 40" />
+              </svg>
+              <span class="relay-tag tag-acdc">ACDC</span>
+              <span class="relay-tag tag-yaka">YAKA</span>
+              <ol class="relay-years">
+                <li class="y-taught-acdc"><i></i><b>1</b><span data-i18n="relay.prep">Prépa</span></li>
+                <li><i></i><b>2</b><span data-i18n="relay.prep">Prépa</span></li>
+                <li class="y-me-acdc y-taught-yaka"><i></i><b>3</b><span>ING1</span></li>
+                <li class="y-me-yaka"><i></i><b>4</b><span>ING2</span></li>
+                <li><i></i><b>5</b><span>ING3</span></li>
+              </ol>
+            </div>
+          </figure>
+
           <!-- Two separate periods, each in its own theme color, split by a
                two-tone line that draws itself on scroll. -->
           <div class="duo" id="duo">
@@ -665,7 +691,7 @@
     <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
     <script src="assets/vendor/SplitText.min.js" defer></script>
     <script src="assets/vendor/lenis.min.js" defer></script>
-    <script src="assets/js/data.js?v=43d912b9" defer></script>
+    <script src="assets/js/data.js?v=5e0eab45" defer></script>
     <script src="assets/js/pigment.js?v=0d9db74f" defer></script>
     <script src="assets/js/site.js?v=bd4df231" defer></script>
   </body>

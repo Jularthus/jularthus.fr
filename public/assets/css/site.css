@@ -1991,6 +1991,234 @@ html:not(.js) .term-body {
 }
 
 /* ============================================================
+   THE RELAY: a 5-year track; each arc runs from me to the students
+   of that role. Arcs draw once on reveal, then a few dashes flow
+   along them, from teacher to students, like a baton being passed.
+   ============================================================ */
+.relay {
+  --acdc-c: var(--acdc);
+  --yaka-c: var(--ikb-lift);
+  margin-top: clamp(30px, 4vw, 44px);
+}
+.relay-cap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px 14px;
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 15.5px;
+}
+.relay-kicker {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.relay-c-acdc,
+.relay-c-yaka {
+  font-family: var(--mono);
+  font-size: 0.82em;
+  font-weight: 500;
+}
+.relay-c-acdc {
+  color: var(--acdc-ink);
+}
+.relay-c-yaka {
+  color: var(--ikb-lift);
+}
+.relay-stage {
+  position: relative;
+  max-width: 760px;
+  height: 170px;
+  margin: 10px auto 0;
+}
+/* the arcs live in a 100 x 40 box whose bottom edge is the track */
+.relay-arcs {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 8px;
+  width: 100%;
+  height: 100px;
+  overflow: visible;
+}
+.relay-arc,
+.relay-flow {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+.arc-acdc {
+  stroke: var(--acdc-c);
+}
+.arc-yaka {
+  stroke: var(--yaka-c);
+}
+.relay-arc {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  opacity: 0.55;
+}
+.relay-flow {
+  stroke-width: 3.5;
+  stroke-dasharray: 0.035 0.09;
+  opacity: 0;
+}
+.js .relay:not(.in) .relay-arc {
+  stroke-dashoffset: 1;
+}
+.js .relay .relay-arc {
+  transition: stroke-dashoffset 1.4s var(--ease) 0.2s;
+}
+.js .relay .arc-yaka.relay-arc {
+  transition-delay: 0.7s;
+}
+.js .relay.in .relay-flow {
+  opacity: 1;
+  transition: opacity 0.6s ease 1.7s;
+  animation: relay-flow 2.6s linear infinite;
+}
+.js .relay.in .arc-yaka.relay-flow {
+  animation-duration: 1.6s;
+}
+@keyframes relay-flow {
+  to {
+    stroke-dashoffset: -0.125;
+  }
+}
+
+.relay-tag {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 2px 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  background: var(--paper);
+  border: 1px solid currentColor;
+}
+.tag-acdc {
+  left: 30%;
+  top: 30px;
+  color: var(--acdc-ink);
+}
+.tag-yaka {
+  left: 60%;
+  top: 56px;
+  color: var(--ikb-lift);
+}
+
+/* the track: stations at 10, 30, 50, 70 and 90 % (five equal cells) */
+.relay-years {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 108px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  list-style: none;
+}
+.relay-years::before {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 0;
+  height: 2px;
+  margin-top: -1px;
+  background: linear-gradient(90deg, var(--acdc-c), color-mix(in srgb, var(--acdc-c) 50%, var(--yaka-c)) 50%, var(--yaka-c));
+  opacity: 0.35;
+}
+.relay-years li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.relay-years i {
+  width: 14px;
+  height: 14px;
+  margin-top: -7px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--line);
+}
+.relay-years b {
+  margin-top: 8px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--ink-soft);
+}
+.relay-years span {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+/* students of each role glow in its color; my own years are filled */
+.y-taught-acdc i {
+  border-color: var(--acdc-c);
+  box-shadow: 0 0 14px 2px color-mix(in srgb, var(--acdc-c) 60%, transparent);
+}
+.y-me-acdc i {
+  border: 0;
+  background: linear-gradient(90deg, var(--acdc-c) 50%, var(--yaka-c) 50%);
+  box-shadow:
+    -4px 0 14px color-mix(in srgb, var(--acdc-c) 55%, transparent),
+    4px 0 14px color-mix(in srgb, var(--yaka-c) 45%, transparent);
+}
+.y-me-yaka i {
+  border: 0;
+  background: var(--yaka-c);
+  box-shadow: 0 0 14px 2px color-mix(in srgb, var(--yaka-c) 50%, transparent);
+}
+.y-taught-acdc b,
+.y-me-acdc b,
+.y-me-yaka b {
+  color: var(--ink);
+}
+.y-taught-acdc span {
+  color: var(--acdc-ink);
+}
+.y-me-acdc span,
+.y-me-yaka span {
+  color: var(--ikb-lift);
+}
+@media (max-width: 560px) {
+  .relay-stage {
+    height: 150px;
+  }
+  .relay-arcs {
+    height: 84px;
+  }
+  .relay-years {
+    top: 92px;
+  }
+  .tag-acdc {
+    top: 26px;
+  }
+  .tag-yaka {
+    top: 48px;
+  }
+  .relay-years b {
+    font-size: 20px;
+  }
+  .relay-years span {
+    font-size: 9.5px;
+    letter-spacing: 0.06em;
+  }
+}
+
+/* ============================================================
    04 · STACK: hovering a skill brings it into focus; the others
    soften and blur slightly, like a camera pulling focus.
    ============================================================ */
