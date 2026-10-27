@@ -1631,8 +1631,25 @@ html:not(.js) .term-body {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  /* logo, year, name, full name, intro, stat box, the rest */
+  grid-template-rows: repeat(7, auto);
   column-gap: clamp(56px, 8vw, 128px);
   margin-top: clamp(28px, 4vw, 48px);
+}
+/* Both columns share the parent's rows (subgrid): every row takes the
+   height of the taller side, so the stat boxes always start level,
+   whatever the text above them. */
+.duo-col {
+  display: grid;
+  grid-row: 1 / span 7;
+  grid-template-rows: subgrid;
+  align-content: start;
+}
+.duo-acdc {
+  grid-column: 1;
+}
+.duo-yaka {
+  grid-column: 2;
 }
 .duo-acdc {
   --theme: var(--acdc);
@@ -1816,11 +1833,40 @@ html:not(.js) .term-body {
 .duo-intro {
   margin-top: 22px;
   color: var(--ink-soft);
+  align-self: start;
 }
 .duo-intro strong,
 .duo-list strong {
   color: var(--ink);
   font-weight: 600;
+}
+/* Hand-highlighted key words: a static marker stroke in the column's
+   color, slightly crooked and uneven like a real highlighter. */
+.duo .hl {
+  position: relative;
+  z-index: 0;
+  background: none;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.duo .hl::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0.18em -0.22em 0.02em -0.18em;
+  background: color-mix(in srgb, var(--theme) 34%, transparent);
+  border-radius: 0.2em 0.45em 0.25em 0.5em;
+  rotate: -0.8deg;
+}
+.duo-list li:nth-child(even) .hl::before,
+.duo-yaka .duo-intro .hl::before {
+  rotate: 0.6deg;
+  inset: 0.22em -0.18em 0 -0.24em;
+}
+@media (prefers-color-scheme: dark) {
+  .duo .hl::before {
+    background: color-mix(in srgb, var(--theme) 30%, transparent);
+  }
 }
 .duo-sub {
   margin-top: 24px;
@@ -1829,6 +1875,9 @@ html:not(.js) .term-body {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--theme-ink);
+}
+.duo-rest > .duo-list:first-child {
+  margin-top: 22px;
 }
 .duo-list {
   list-style: none;
@@ -1892,8 +1941,9 @@ html:not(.js) .term-body {
 }
 
 @media (max-width: 860px) {
-  .duo {
-    grid-template-columns: 1fr;
+  .duo,
+  .duo-col {
+    display: block;
   }
   /* stacked: the line turns horizontal between the two periods */
   .duo-line {
