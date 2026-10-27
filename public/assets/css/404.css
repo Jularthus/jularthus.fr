@@ -234,7 +234,8 @@ html:not(.js) .caret {
 .mew {
   --t: 0;
   --rest: 0.12;
-  position: absolute;
+  /* fixed: Mew roams the whole screen; 404.js moves it with translate */
+  position: fixed;
   z-index: 2;
   left: 0;
   top: 0;
@@ -249,7 +250,8 @@ html:not(.js) .caret {
   transition:
     opacity 0.35s ease,
     filter 0.35s ease,
-    transform 0.32s var(--ease);
+    scale 0.32s var(--ease),
+    rotate 0.6s ease;
 }
 html:not(.js) .mew {
   display: none;
@@ -283,7 +285,7 @@ html:not(.js) .mew {
 }
 /* the teleport: a psychic pop out, then back in somewhere else */
 .mew.pop {
-  transform: scale(0.2);
+  scale: 0.2;
   opacity: 0;
   filter: blur(6px) drop-shadow(0 0 30px rgba(var(--mew), 1));
 }
@@ -292,7 +294,7 @@ html:not(.js) .mew {
 }
 @keyframes appear {
   from {
-    transform: scale(1.4);
+    scale: 1.4;
     filter: blur(4px) drop-shadow(0 0 34px rgba(var(--mew), 1));
   }
 }
