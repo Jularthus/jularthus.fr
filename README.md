@@ -12,7 +12,8 @@ tools/    preview, browser tests, Lighthouse, generated images
 
 ```sh
 cd tools
-npm run serve        # preview on http://127.0.0.1:8787 (from another machine: ssh -L 8787:localhost:8787)
+npm run serve        # preview on http://127.0.0.1:8787, unknown URLs show the 404 page like nginx does
+                     # (from another machine: ssh -L 8787:localhost:8787)
 npm run check        # screenshots + console errors, horizontal scroll, em dashes, FR/EN, reduced motion, no-JS
 npm run interact     # terminal, command palette, skill sheet, language switch
 npm run csp          # page under the production Content-Security-Policy
@@ -42,6 +43,8 @@ sudo ops/deploy.sh        # first time: ownership, site, nginx config + gzip
 ops/deploy.sh             # put the v2 branch live (no password once owned)
 ops/deploy.sh v1          # roll back to any branch, tag or commit
 ```
+
+Unknown URLs get `public/404.html` (status 404), set up in the nginx vhost.
 
 With sudo, the script also applies `ops/nginx/jularthus.fr.conf` when it changed
 (backup in `/etc/nginx/backup/`, `nginx -t`, reload, automatic restore on failure).

@@ -138,6 +138,37 @@ async function crawl(p) {
       await ctx.close();
     }
   }
+  // The 404 page: real 404 status, complete in both languages, with
+  // reduced motion and without JS, no errors, no em dashes.
+  for (const [name, opts] of [
+    ["404 fr", { locale: "fr-FR" }],
+    ["404 en", { locale: "en-US" }],
+    ["404 reduced", { locale: "fr-FR", reducedMotion: "reduce" }],
+    ["404 nojs", { locale: "fr-FR", javaScriptEnabled: false }],
+    ["404 mobile", { locale: "fr-FR", viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }],
+  ]) {
+    const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, ...opts });
+    const p = await ctx.newPage();
+    const errs = [];
+    p.on("pageerror", (e) => errs.push("pageerror: " + e.message));
+    p.on("console", (m) => m.type() === "error" && !/status of 404/.test(m.text()) && errs.push(m.text()));
+    const res = await p.goto(BASE + "nowhere/at/all", { waitUntil: "networkidle" });
+    await p.waitForTimeout(2200);
+    const info = await p.evaluate(() => ({
+      text: document.body.innerText.replace(/\s+/g, " ").trim(),
+      title: document.title,
+      overflow: document.documentElement.scrollWidth - window.innerWidth,
+    }));
+    const problems = [];
+    if (res.status() !== 404) problems.push("status " + res.status());
+    if (!/404/.test(info.text)) problems.push("no 404 shown");
+    if (!/(volatilis|vanished)/.test(info.text)) problems.push("message missing");
+    if (/—/.test(info.text + info.title)) problems.push("em dash");
+    if (info.overflow > 0) problems.push("horizontal scroll");
+    report.push({ run: name, errors: errs, problems, text: problems.length ? info.text.slice(0, 120) : undefined });
+    await ctx.close();
+  }
+
   await b.close();
   console.log(JSON.stringify(report, null, 1));
 })();

@@ -12,7 +12,7 @@ const CSP = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inl
     if (route.request().resourceType() === "document") h["content-security-policy"] = CSP;
     route.fulfill({ response: r, headers: h });
   });
-  await p.goto("http://127.0.0.1:8787/", { waitUntil: "networkidle" });
+  await p.goto(process.argv[2] || "http://127.0.0.1:8787/", { waitUntil: "networkidle" });
   await p.waitForTimeout(3000);
   for (let y = 0; y < 12000; y += 600) { await p.evaluate(y => scrollTo(0, y), y); await p.waitForTimeout(60); }
   await p.click('[data-set-lang="en"]'); await p.waitForTimeout(500);

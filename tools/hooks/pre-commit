@@ -1,21 +1,21 @@
 #!/bin/bash
-# Keeps the ?v= cache-busting hashes in public/index.html in sync with the
+# Keeps the ?v= cache-busting hashes in public/*.html in sync with the
 # CSS/JS being committed. Enabled with: git config core.hooksPath tools/hooks
 set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
 
-INDEX=public/index.html
-
 # Nothing to do unless a stylesheet or script is part of this commit.
 git diff --cached --name-only | grep -qE '^public/assets/(css|js)/' || exit 0
 
-# Rewriting index.html would sweep its unstaged edits into this commit.
-if ! git diff --quiet -- "$INDEX"; then
-  echo "pre-commit: $INDEX has unstaged changes; stage or stash them, then commit again." >&2
-  exit 1
-fi
+# Rewriting a page would sweep its unstaged edits into this commit.
+for page in public/*.html; do
+  if ! git diff --quiet -- "$page"; then
+    echo "pre-commit: $page has unstaged changes; stage or stash them, then commit again." >&2
+    exit 1
+  fi
+done
 
-if [ "$(python3 tools/stamp-assets.py)" = "changed" ]; then
-  git add "$INDEX"
-  echo "pre-commit: refreshed asset hashes in $INDEX"
-fi
+python3 tools/stamp-assets.py | while read -r page; do
+  git add "$page"
+  echo "pre-commit: refreshed asset hashes in $page"
+done

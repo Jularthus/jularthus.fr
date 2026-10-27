@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="fr" data-lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#002fa7" />
+    <meta name="robots" content="noindex" />
+    <title>404 · jularthus.fr</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/assets/fonts/dm-serif-display-italic.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/assets/css/404.css?v=c4021940" />
+    <!-- Served at any URL, so every path here is absolute. -->
+    <script src="/assets/js/boot.js?v=0764aed8"></script>
+  </head>
+  <body>
+    <main class="lost" id="lost">
+      <div class="field" aria-hidden="true">
+        <canvas id="pigment"></canvas>
+        <div class="grain"></div>
+      </div>
+
+      <div class="lost-in">
+        <p class="lost-cmd"><b>$</b> cd <span id="lost-path">/</span></p>
+        <h1 class="lost-code">
+          <span class="sr-only">404</span>
+          <span class="lost-digits" id="lost-digits" aria-hidden="true"><span>4</span><span>0</span><span id="perch-4">4</span><span class="caret"></span></span>
+        </h1>
+        <p class="lost-line" id="lost-line">Cette page s'est volatilisée.</p>
+        <a class="lost-home" id="lost-home" href="/"><span id="lost-home-label">Retour à l'accueil</span><span class="arr" aria-hidden="true">↵</span></a>
+
+        <!-- Mew, the elusive one: barely there until you come looking.
+             404.js perches it on the last "4", the button or the $ line. -->
+        <button class="mew" id="mew" type="button" aria-label="Mew" title="Non, je ne suis pas sous le camion." data-title-en="No, I'm not under the truck.">
+          <img src="/assets/img/mew.webp" width="98" height="110" alt="" draggable="false" />
+        </button>
+      </div>
+    </main>
+
+    <script src="/assets/js/pigment.js?v=0d9db74f" defer></script>
+    <script src="/assets/js/404.js?v=f901b7e5" defer></script>
+  </body>
+</html>

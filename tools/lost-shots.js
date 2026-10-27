@@ -1,0 +1,32 @@
+// Screenshots of the 404 page: Mew at rest, near the cursor, after a teleport.
+const { chromium } = require("playwright");
+require("fs").mkdirSync(__dirname + "/out", { recursive: true });
+const BASE = process.argv[2] || "http://127.0.0.1:8787/projets/secret-mew";
+(async () => {
+  const b = await chromium.launch({ args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"] });
+  const p = await b.newPage({ viewport: { width: 1440, height: 900 }, locale: "fr-FR" });
+  await p.addInitScript(() => { window.__forceGL = true; });
+  const errs = [];
+  p.on("pageerror", (e) => errs.push(e.message));
+  p.on("console", (m) => m.type() === "error" && errs.push(m.text()));
+  const res = await p.goto(BASE, { waitUntil: "networkidle" });
+  await p.mouse.move(80, 80);
+  await p.waitForTimeout(3500);
+  await p.screenshot({ path: __dirname + "/out/404-rest.png" });
+  const m = await p.evaluate(() => { const r = document.getElementById("mew").getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
+  await p.mouse.move(m.x + 60, m.y + 40, { steps: 8 });
+  await p.waitForTimeout(700);
+  await p.screenshot({ path: __dirname + "/out/404-near.png" });
+  const near = await p.evaluate(() => getComputedStyle(document.getElementById("mew")).opacity);
+  await p.mouse.click(m.x, m.y);
+  await p.waitForTimeout(900);
+  await p.screenshot({ path: __dirname + "/out/404-teleport.png" });
+  console.log("status", res.status(), "| opacity near:", near, "| errors:", errs.join(" | ") || "none");
+  const mob = await b.newPage({ viewport: { width: 390, height: 844 }, locale: "en-US", isMobile: true, hasTouch: true });
+  await mob.addInitScript(() => { window.__forceGL = true; });
+  await mob.goto(BASE, { waitUntil: "networkidle" });
+  await mob.waitForTimeout(3500);
+  await mob.screenshot({ path: __dirname + "/out/404-mobile-en.png" });
+  console.log("mobile EN line:", await mob.evaluate(() => document.getElementById("lost-line").textContent), "| mew opacity:", await mob.evaluate(() => getComputedStyle(document.getElementById("mew")).opacity));
+  await b.close();
+})();
