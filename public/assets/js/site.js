@@ -280,25 +280,29 @@
     whenIdle(startPigment);
   });
 
+  /* Rolls a .count element from data-from to data-to. */
+  function countUp(el, delay) {
+    var from = +el.dataset.from;
+    var to = +el.dataset.to;
+    if (!G || REDUCED) {
+      el.textContent = to;
+      return;
+    }
+    var o = { v: from };
+    el.textContent = from;
+    G.to(o, {
+      v: to,
+      duration: 1.8,
+      ease: "power3.out",
+      delay: delay || 0,
+      onUpdate: function () {
+        el.textContent = Math.round(o.v);
+      },
+    });
+  }
   function runCounters() {
-    $$(".count").forEach(function (el) {
-      var from = +el.dataset.from;
-      var to = +el.dataset.to;
-      if (!G || REDUCED) {
-        el.textContent = to;
-        return;
-      }
-      var o = { v: from };
-      el.textContent = from;
-      G.to(o, {
-        v: to,
-        duration: 1.8,
-        ease: "power3.out",
-        delay: 0.3,
-        onUpdate: function () {
-          el.textContent = Math.round(o.v);
-        },
-      });
+    $$(".proof .count").forEach(function (el) {
+      countUp(el, 0.3);
     });
   }
 
@@ -890,6 +894,44 @@
     });
     var sp = $(".tl-spine");
     if (sp) sp.style.transform = "none";
+  }
+
+  /* ==============================================================
+     EN PARALLÈLE: the two-tone line between ACDC and YAKA draws with
+     scroll (down on desktop, across on mobile); 680 counts up once.
+     ============================================================== */
+  var duoLine = $(".duo-line");
+  if (duoLine && G && !REDUCED) {
+    G.matchMedia()
+      .add("(min-width: 861px)", function () {
+        G.fromTo(duoLine, { scaleY: 0 }, {
+          scaleY: 1,
+          ease: "none",
+          scrollTrigger: { trigger: "#duo", start: "top 75%", end: "bottom 70%", scrub: 0.5 },
+        });
+      })
+      .add("(max-width: 860px)", function () {
+        G.fromTo(duoLine, { scaleX: 0 }, {
+          scaleX: 1,
+          ease: "none",
+          scrollTrigger: { trigger: duoLine, start: "top 85%", end: "top 45%", scrub: 0.5 },
+        });
+      });
+  } else if (duoLine) {
+    duoLine.style.transform = "none";
+  }
+  var duoCount = $(".duo-stat .count");
+  if (duoCount) {
+    if (REDUCED || !("IntersectionObserver" in window)) countUp(duoCount);
+    else
+      new IntersectionObserver(
+        function (en, obs) {
+          if (!en[0].isIntersecting) return;
+          obs.disconnect();
+          countUp(duoCount, 0.2);
+        },
+        { threshold: 0.6 }
+      ).observe(duoCount);
   }
 
   /* ==============================================================

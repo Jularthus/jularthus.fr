@@ -32,7 +32,7 @@
 
     <link rel="preload" href="assets/fonts/dm-serif-display-italic.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="assets/css/site.css?v=bc415af8" />
+    <link rel="stylesheet" href="assets/css/site.css?v=5934174b" />
 
     <script type="application/ld+json">
       {
@@ -468,35 +468,78 @@
               </h3>
               <p class="tl-desc" data-i18n-html="tl.6.desc">
                 <strong>Systèmes, Réseaux &amp; Sécurité</strong> : la cybersécurité, celle qui
-                m'occupe la tête depuis le début, désormais au programme.
+                m'occupe la tête depuis le début, désormais au programme. En parallèle, je suis
+                YAKA : j'encadre à mon tour les 680 élèves d'ING1 des 5 campus.
               </p>
             </div>
           </div>
 
           <div class="rule rule-second io">
-            <h3 class="rule-title" data-i18n="acdc.title">En parallèle · Assistant ACDC</h3>
-            <p class="rule-note" data-i18n="acdc.note">Assistant Code et Développement C, pendant l'ING1.</p>
+            <h3 class="rule-title" data-i18n="duo.title">En parallèle · Assistant</h3>
+            <p class="rule-note" data-i18n="duo.note">Deux rôles, deux promotions : ACDC en ING1, YAKA aujourd'hui.</p>
           </div>
-          <div class="acdc">
-            <p class="tl-desc io" data-i18n-html="acdc.p">
-              Je passe de l'autre côté du tableau : <strong>je donne des cours de
-              programmation</strong> (Python, C) aux élèves des promotions suivantes.
-            </p>
-            <ul class="points io" style="--d: 0.08s">
-              <li data-i18n="acdc.1">Encadrement d'une classe d'environ 40 étudiants, en binôme</li>
-              <li data-i18n="acdc.2">Animation de séances et accompagnement à la programmation</li>
-              <li data-i18n="acdc.3">Relecture, validation et amélioration de sujets de TP</li>
-              <li data-i18n="acdc.4">Aide à la compréhension, au débogage et à la méthodologie</li>
-            </ul>
-            <blockquote class="pull io" style="--d: 0.16s">
-              <p data-i18n-html="acdc.quote">
-                Mon objectif : que <b>tous</b> les élèves comprennent les concepts de la semaine.
-                Pas la moyenne, tous. Un groupe de première année m'a même interviewé pour son
-                cours de méthodologie : être étudiant-assistant qui vise le cyber, et ma vision
-                de la place de l'IA dans le domaine.
+
+          <!-- Two separate periods, each in its own theme color, split by a
+               two-tone line that draws itself on scroll. -->
+          <div class="duo" id="duo">
+            <article class="duo-col duo-acdc io" aria-labelledby="acdc-name">
+              <div class="duo-logo">
+                <span class="duo-disc">
+                  <img src="assets/img/acdc.svg" width="240" height="240" loading="lazy" decoding="async" alt="Logo ACDC" />
+                </span>
+              </div>
+              <p class="duo-when" data-i18n="duo.acdc.when">ING1 · 3e année sur 5</p>
+              <h4 class="duo-name" id="acdc-name">ACDC</h4>
+              <p class="duo-full" data-i18n="duo.acdc.full">Assistant Code et Développement C</p>
+              <p class="duo-intro" data-i18n-html="duo.acdc.intro">
+                Je passe de l'autre côté du tableau : <strong>je donne des cours de
+                programmation</strong> (Python, C) aux élèves de prépa, en <strong>1re année
+                sur 5</strong> du cursus.
               </p>
-              <cite data-i18n="acdc.cite">L'interview dont je suis le plus fier ne parle pas de code.</cite>
-            </blockquote>
+              <ul class="duo-list">
+                <li data-i18n="duo.acdc.1">Encadrement d'une classe d'environ 40 étudiants, en binôme</li>
+                <li data-i18n="duo.acdc.2">Animation de séances et accompagnement à la programmation</li>
+                <li data-i18n="duo.acdc.3">Relecture, validation et amélioration de sujets de TP</li>
+                <li data-i18n="duo.acdc.4">Aide à la compréhension, au débogage et à la méthodologie</li>
+                <li data-i18n="duo.acdc.5">Objectif : que tous les élèves comprennent les notions de la semaine, pas seulement la moyenne</li>
+                <li data-i18n="duo.acdc.6">Interviewé par des élèves de prépa pour leur cours de méthodologie</li>
+              </ul>
+            </article>
+
+            <span class="duo-line" aria-hidden="true"></span>
+
+            <article class="duo-col duo-yaka io" aria-labelledby="yaka-name">
+              <div class="duo-logo">
+                <span class="duo-disc duo-secret">
+                  <img src="assets/img/yaka-teaser.svg" width="240" height="240" loading="lazy" decoding="async" alt="" />
+                </span>
+                <span class="duo-seal" data-i18n="duo.yaka.seal">Thème pas encore dévoilé</span>
+              </div>
+              <p class="duo-when" data-i18n="duo.yaka.when">ING2 · 4e année sur 5 · aujourd'hui</p>
+              <h4 class="duo-name" id="yaka-name" data-decrypt><span data-i18n="duo.yaka.name">YAKA</span></h4>
+              <p class="duo-full">Yet Another Kind of Assistant</p>
+              <p class="duo-intro" data-i18n-html="duo.yaka.intro">
+                Je suis YAKA : <strong>j'encadre à mon tour les élèves de 3e année</strong> (ING1).
+              </p>
+              <div class="duo-stat">
+                <span class="duo-num"><span class="count" data-from="0" data-to="680">680</span></span>
+                <span class="duo-num-label" data-i18n="duo.yaka.stat">élèves d'ING1 encadrés, sur les 5 campus de l'EPITA</span>
+                <span class="duo-campus">Paris · Toulouse · Lyon · Rennes · Strasbourg</span>
+              </div>
+              <p class="duo-sub" data-i18n="duo.yaka.on">J'interviens sur</p>
+              <ul class="duo-list duo-list-2">
+                <li data-i18n="duo.yaka.s1">Atelier Java</li>
+                <li data-i18n="duo.yaka.s2">JWS (Java Web Service), projet</li>
+                <li data-i18n="duo.yaka.s3">Atelier C++</li>
+                <li data-i18n="duo.yaka.s4">Tiger, projet de compilateur</li>
+                <li data-i18n="duo.yaka.s5">Atelier JavaScript</li>
+              </ul>
+              <ul class="duo-list">
+                <li data-i18n="duo.yaka.1">Débogage des élèves pendant leurs activités</li>
+                <li data-i18n="duo.yaka.2">Relecture de leur code, pour faire progresser les bonnes pratiques</li>
+                <li data-i18n-html="duo.yaka.3"><strong>Respo Java</strong> : j'écris de nouveaux exercices et je veille à ce que les sujets et les examens restent à jour</li>
+              </ul>
+            </article>
           </div>
         </div>
       </section>
@@ -615,8 +658,8 @@
     <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
     <script src="assets/vendor/SplitText.min.js" defer></script>
     <script src="assets/vendor/lenis.min.js" defer></script>
-    <script src="assets/js/data.js?v=d9b93fcf" defer></script>
+    <script src="assets/js/data.js?v=8ddccb88" defer></script>
     <script src="assets/js/pigment.js?v=0d9db74f" defer></script>
-    <script src="assets/js/site.js?v=de76eb83" defer></script>
+    <script src="assets/js/site.js?v=fade476e" defer></script>
   </body>
 </html>
