@@ -117,13 +117,27 @@ html.i18n-pending body {
   mix-blend-mode: overlay;
 }
 
-/* Content: four things, centered, nothing else. */
+/* Content: four things, centered, nothing else. Layers, bottom to top:
+   pigment field (-1), Mew (0), every text and the button (1). The text
+   blocks let clicks through so Mew stays catchable behind them. */
 .lost-in {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+.lost-cmd,
+.lost-code,
+.lost-line,
+.lost-home {
+  position: relative;
+  z-index: 1;
+}
+.lost-cmd,
+.lost-code,
+.lost-line {
+  pointer-events: none;
 }
 .lost-cmd {
   max-width: 90vw;
@@ -236,7 +250,7 @@ html:not(.js) .caret {
   --rest: 0.12;
   /* fixed: Mew roams the whole screen; 404.js moves it with translate */
   position: fixed;
-  z-index: 2;
+  z-index: 0;
   left: 0;
   top: 0;
   width: 120px;
