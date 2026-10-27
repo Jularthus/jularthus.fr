@@ -2137,11 +2137,12 @@ html:not(.js) .term-body {
    follow the arc. They appear once the arc has drawn. */
 .relay-head {
   position: absolute;
-  top: 90px;
-  width: 12px;
-  height: 10px;
-  margin-left: -6px;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  top: 87px;
+  width: 16px;
+  height: 14px;
+  margin-left: -8px;
+  /* a notched "stealth" head: the arc ends in the notch */
+  clip-path: polygon(0 0, 50% 22%, 100% 0, 50% 100%);
   transform-origin: 50% 100%;
 }
 .head-acdc {
@@ -2149,8 +2150,9 @@ html:not(.js) .term-body {
   background: var(--acdc-c);
   rotate: 15deg;
 }
+/* lands on the blue half of station 3; the teal arc leaves from the teal half */
 .head-yaka {
-  left: 50%;
+  left: calc(50% + 6px);
   background: var(--yaka-c);
   rotate: 12deg;
 }
@@ -2254,23 +2256,17 @@ html:not(.js) .term-body {
   .relay-years {
     top: 92px;
   }
-  .relay-stage {
-    margin-top: 22px;
-  }
-  /* compact tags, ACDC above its arc so the two never collide */
-  .relay-tag {
-    font-size: 10px;
-    letter-spacing: 0.04em;
-    padding: 1px 6px;
-  }
   .tag-acdc {
-    top: 0;
+    top: 26px;
   }
   .tag-yaka {
-    top: 52px;
+    top: 48px;
   }
   .relay-head {
-    top: 75px;
+    top: 71px;
+  }
+  .head-yaka {
+    left: calc(50% + 2px);
   }
   .relay-years b {
     font-size: 20px;
