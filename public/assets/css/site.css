@@ -1840,6 +1840,18 @@ html:not(.js) .term-body {
   color: var(--ink);
   font-weight: 600;
 }
+/* "(Responsable)": pure ink, bold, with a soft blurred glow. */
+.duo-list .lead-tag {
+  font-weight: 700;
+  color: #000;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.28);
+}
+@media (prefers-color-scheme: dark) {
+  .duo-list .lead-tag {
+    color: #fff;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.55);
+  }
+}
 /* Hand-highlighted key words: a static marker stroke in the column's
    color, slightly crooked and uneven like a real highlighter. */
 .duo .hl {
@@ -1998,7 +2010,7 @@ html:not(.js) .term-body {
 .relay {
   --acdc-c: var(--acdc);
   --yaka-c: var(--ikb-lift);
-  margin-top: clamp(30px, 4vw, 44px);
+  margin-top: clamp(48px, 6vw, 72px);
 }
 .relay-cap {
   display: flex;

@@ -169,7 +169,7 @@ window.SITE_DATA = (function () {
     "duo.yaka.intro": "I am now a YAKA: I in turn supervise <mark class=\"hl\">third-year students</mark> (ING1).",
     "duo.yaka.stat": "ING1 students supervised, across EPITA's 5 campuses",
     "duo.yaka.on": "I help on",
-    "duo.yaka.s1": "Java workshop",
+    "duo.yaka.s1": "Java workshop <strong class=\"lead-tag\">(Lead)</strong>",
     "duo.yaka.s2": "JWS (Java Web Services)",
     "duo.yaka.s3": "C++ workshop",
     "duo.yaka.s4": "Tiger, compiler project",
