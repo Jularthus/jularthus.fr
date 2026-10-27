@@ -898,7 +898,7 @@
 
   /* ==============================================================
      EN PARALLÈLE: the two-tone line between ACDC and YAKA draws with
-     scroll (down on desktop, across on mobile); 680 counts up once.
+     scroll (down on desktop, across on mobile); 30 and 680 count up once.
      ============================================================== */
   var duoLine = $(".duo-line");
   if (duoLine && G && !REDUCED) {
@@ -920,19 +920,17 @@
   } else if (duoLine) {
     duoLine.style.transform = "none";
   }
-  var duoCount = $(".duo-stat .count");
-  if (duoCount) {
-    if (REDUCED || !("IntersectionObserver" in window)) countUp(duoCount);
-    else
-      new IntersectionObserver(
-        function (en, obs) {
-          if (!en[0].isIntersecting) return;
-          obs.disconnect();
-          countUp(duoCount, 0.2);
-        },
-        { threshold: 0.6 }
-      ).observe(duoCount);
-  }
+  $$(".duo-stat .count").forEach(function (el) {
+    if (REDUCED || !("IntersectionObserver" in window)) return countUp(el);
+    new IntersectionObserver(
+      function (en, obs) {
+        if (!en[0].isIntersecting) return;
+        obs.disconnect();
+        countUp(el, 0.2);
+      },
+      { threshold: 0.6 }
+    ).observe(el);
+  });
 
   /* ==============================================================
      SKILLS: the sheet grows out of the
