@@ -221,7 +221,7 @@ window.SITE_DATA = (function () {
     "contact.copy": "Copy the address",
     "contact.copyShort": "copy",
     "contact.server": "Server",
-    "contact.made": "© Jules-Arthus Klein · hand-made, no framework, hosted on JArvis.",
+    "contact.made": "© Jules-Arthus Klein · hosted on JArvis.",
     "contact.hint": "<kbd>Ctrl</kbd> <kbd>K</kbd> to navigate · try the terminal",
 
     close: "Close",
