@@ -2133,6 +2133,37 @@ html:not(.js) .term-body {
   color: var(--ikb-lift);
 }
 
+/* Arrowheads where each arc lands: on my students' year, tilted to
+   follow the arc. They appear once the arc has drawn. */
+.relay-head {
+  position: absolute;
+  top: 90px;
+  width: 12px;
+  height: 10px;
+  margin-left: -6px;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: 50% 100%;
+}
+.head-acdc {
+  left: 10%;
+  background: var(--acdc-c);
+  rotate: 15deg;
+}
+.head-yaka {
+  left: 50%;
+  background: var(--yaka-c);
+  rotate: 12deg;
+}
+.js .relay:not(.in) .relay-head {
+  opacity: 0;
+}
+.js .relay .relay-head {
+  transition: opacity 0.4s ease 1.3s;
+}
+.js .relay .head-yaka {
+  transition-delay: 1.8s;
+}
+
 /* the track: stations at 10, 30, 50, 70 and 90 % (five equal cells) */
 .relay-years {
   position: absolute;
@@ -2223,11 +2254,23 @@ html:not(.js) .term-body {
   .relay-years {
     top: 92px;
   }
+  .relay-stage {
+    margin-top: 22px;
+  }
+  /* compact tags, ACDC above its arc so the two never collide */
+  .relay-tag {
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    padding: 1px 6px;
+  }
   .tag-acdc {
-    top: 26px;
+    top: 0;
   }
   .tag-yaka {
-    top: 48px;
+    top: 52px;
+  }
+  .relay-head {
+    top: 75px;
   }
   .relay-years b {
     font-size: 20px;

@@ -153,6 +153,8 @@ window.SITE_DATA = (function () {
     "relay.kicker": "The relay",
     "relay.cap": "I was taught, now I pass it on: in ING1 to prep students, <span class=\"relay-c-acdc\">ACDC</span>; in ING2 to ING1 students, <span class=\"relay-c-yaka\">YAKA</span>.",
     "relay.prep": "Prep",
+    "relay.tag.acdc": "ACDC · year 3 → 1",
+    "relay.tag.yaka": "YAKA · year 4 → 3",
     "duo.acdc.when": "ING1 · year 3 of 5",
     "duo.acdc.full": "C Programming and Development Assistant",
     "duo.acdc.intro": "I moved to the other side of the classroom: I teach <mark class=\"hl\">programming classes</mark> (Python, C) to prep students in <strong>year 1</strong> of the curriculum.",
