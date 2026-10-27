@@ -169,6 +169,25 @@ async function crawl(p) {
     await ctx.close();
   }
 
+  // security.txt (RFC 9116): served as text, required fields present, and
+  // a warning a month before it expires (Expires must then be pushed back).
+  {
+    const ctx = await b.newContext();
+    const res = await ctx.request.get(BASE + ".well-known/security.txt");
+    const body = await res.text();
+    const problems = [];
+    if (res.status() !== 200) problems.push("status " + res.status());
+    if (!/^text\/plain/.test(res.headers()["content-type"] || "")) problems.push("content-type " + res.headers()["content-type"]);
+    if (!/^Contact: (mailto:|https:)/m.test(body)) problems.push("no Contact");
+    const exp = (body.match(/^Expires: (.+)$/m) || [])[1];
+    const days = exp ? (new Date(exp) - Date.now()) / 864e5 : -1;
+    if (!exp || isNaN(days)) problems.push("no valid Expires");
+    else if (days < 0) problems.push("expired on " + exp);
+    else if (days < 30) problems.push("expires in " + Math.floor(days) + " days: update Expires");
+    report.push({ run: "security.txt", errors: [], problems, expiresInDays: Math.floor(days) });
+    await ctx.close();
+  }
+
   await b.close();
   console.log(JSON.stringify(report, null, 1));
 })();

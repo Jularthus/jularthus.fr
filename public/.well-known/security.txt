@@ -1,0 +1,6 @@
+# Security contact for jularthus.fr and its subdomains (RFC 9116).
+# Found a vulnerability? Write to me: every report is read and answered.
+Contact: mailto:ja.klein@jularthus.fr
+Expires: 2027-10-01T00:00:00.000Z
+Preferred-Languages: fr, en
+Canonical: https://jularthus.fr/.well-known/security.txt
