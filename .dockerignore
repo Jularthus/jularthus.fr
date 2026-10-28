@@ -1,0 +1,11 @@
+# Only public/ and the site's nginx config go into the image.
+*
+!public/
+!ops/nginx/site.conf
+# Never in the build context, whatever the lines above allow
+.git
+.env
+.env.*
+data
+*.db
+tools

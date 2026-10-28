@@ -1,0 +1,21 @@
+services:
+  jularthus:
+    build: .
+    container_name: jularthus
+    init: true
+    env_file: .env
+    environment:
+      - TZ=Europe/Paris
+    ports:
+      - "127.0.0.1:${PORT:-8380}:8080"
+    volumes:
+      # Nothing is written at runtime; data/ holds the backups (make backup)
+      - ./data:/data
+    healthcheck:
+      # 127.0.0.1, not localhost: in Alpine localhost resolves to ::1 first,
+      # and nginx only listens on IPv4
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+    restart: unless-stopped
